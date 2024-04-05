@@ -404,7 +404,7 @@ FodyWeavers.xsd
 *.suo
 *.ntvs*
 *.njsproj
-*.sln
+
 
 # User-specific files
 *.user
