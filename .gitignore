@@ -396,3 +396,88 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+.idea/
+
+# Visual Studio files
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# User-specific files
+*.user
+*.userosscache
+*.suo
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio code coverage results
+*.coverage
+*.coveragexml
+
+# TypeScript
+*.js
+*.map
+
+# Node.js
+node_modules/
+
+# Package files
+*.nupkg
+*.pup
+*.pupproj
+
+# ReSharper
+_ReSharper*/
+*.ReSharper*
+*.DotSettings.user
+
+# TeamCity
+_TeamCity*
+
+# GhostDoc plugin setting file
+*.GhostDoc.xml
+
+# DotCover
+*.dotCover
+
+# NCrunch
+_NCrunch_*
+.*crunch*.local.xml
+
+# Installshield output folder
+[Ee]xpress/
+
+# DocProject
+DocProject/buildhelp/
+DocProject/Help/*.HxT
+DocProject/Help/*.HxC
+DocProject/Help/*.hhc
+DocProject/Help/*.hhk
+DocProject/Help/*.hhp
+DocProject/Help/Html2
+DocProject/Help/html
+
+# Click-Once
+publish/
+
+# Publish Web Output
+*.Publish.xml
+*.pubxml
+*.publishproj
