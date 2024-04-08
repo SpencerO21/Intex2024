@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Intex2024.Data;
+using Intex2024.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,13 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
+
+// SQL Server Database Configuration
+var storeConnectionString = builder.Configuration.GetConnectionString("StoreConnection") ??
+                            throw new InvalidOperationException("Connection string 'StoreConnection' not found.");
+builder.Services.AddDbContext<IntexStoreContext>(options =>
+    options.UseSqlServer(storeConnectionString));
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
