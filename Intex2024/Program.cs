@@ -5,6 +5,7 @@ using Intex2024.Data;
 using Microsoft.Extensions.DependencyInjection;
 
 using Intex2024.Models;
+using Microsoft.AspNetCore.Mvc;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -64,19 +65,31 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-app.MapRazorPages();
-app.MapControllerRoute(
-    name: "pagination",
-    pattern: "Products/{pageNum}/{pageSize}",
+    name: "productDetails",
+    pattern: "Products/{color}/{cat}/{pageNum}",
     defaults: new { Controller = "Home", action = "Index" });
 
 app.MapControllerRoute(
+    name: "productByCategory",
+    pattern: "Category/{cat}/{pageNum?}", // Use a distinct path segment to differentiate
+    defaults: new { Controller = "Home", action = "Index" });
+
+app.MapControllerRoute(
+    name: "productByColor",
+    pattern: "Color/{color}/{pageNum?}", // Use a distinct path segment to differentiate
+    defaults: new { Controller = "Home", action = "Index"});
+
+app.MapControllerRoute(
+    name: "pagination",
+    pattern: "Products/Page/{pageNum}", // Ensure this doesn't conflict with other patterns
+    defaults: new { Controller = "Home", action = "Index", pageNum = 1 });
+
+app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-app.MapDefaultControllerRoute();
+
 app.MapRazorPages();
+
 
 app.Run();
