@@ -20,6 +20,7 @@ var storeConnectionString = builder.Configuration.GetConnectionString("StoreConn
                             throw new InvalidOperationException("Connection string 'StoreConnection' not found.");
 builder.Services.AddDbContext<IntexStoreContext>(options =>
     options.UseSqlServer(storeConnectionString));
+builder.Services.AddScoped<IStoreRepository, EFStoreRepository>();
 
 builder.Services.AddControllersWithViews();
 
@@ -48,5 +49,11 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
+app.MapControllerRoute(
+    name: "pagination",
+    pattern: "Products/{pageNum}/{pageSize}",
+    defaults: new { Controller = "Home", action = "Index" });
+
+app.MapDefaultControllerRoute();
 
 app.Run();
