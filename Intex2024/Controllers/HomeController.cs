@@ -16,26 +16,47 @@ public class HomeController : Controller
         _repo = temp;
     }
 
-    public IActionResult Index(int pageSize = 5, int pageNum = 1)
+    public IActionResult Index(string? cat, string? color, int pageSize = 5, int pageNum = 1)
     {
+        var query = _repo.Products.AsQueryable();
         
-        var productsListViewModel = new ProductListViewModel()
+        if (!string.IsNullOrEmpty(cat))
+        {
+            query = query.Where(x => x.Category1 == cat || x.Category2 == cat || x.Category3 == cat);
+            ViewBag.SelectedCategory = cat;
+        }
+
+        if (!string.IsNullOrEmpty(color))
+        {
+            query = query.Where(x => x.PrimaryColor == color || x.SecondaryColor == color);
+            ViewBag.SelectedColors = color;
+        }
+
+        var totalItems = query.Count();
+
+        var products = query
+            .OrderBy(x => x.Name)
+            .Skip((pageNum - 1) * pageSize)
+            .Take(pageSize);
+
+        var viewModel = new ProductListViewModel
         {
             PaginationInfo = new PaginationInfo
             {
                 CurrentPage = pageNum,
                 ItemsPerPage = pageSize,
-                TotalItems = _repo.Products.Count()
+                TotalItems = totalItems
             },
+            currentCat = cat,
+            currentColor = color,
             SelectedPageSize = pageSize,
-            products = _repo.Products
-                .OrderBy(x => x.Name)
-                .Skip((pageNum - 1) * pageSize)
-                .Take(pageSize),
+            products = products
         };
 
-        return View(productsListViewModel);
+        return View(viewModel);
     }
+
+
     
     public ActionResult ProductDetails(int id)
     {
