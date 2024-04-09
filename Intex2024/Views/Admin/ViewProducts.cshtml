@@ -1,0 +1,14 @@
+﻿@{
+}
+@model Intex2024.Models.ViewModels.ProductListViewModel
+
+<h1>Products</h1>
+
+<p>My page is working I just need to access product information</p>
+<!-- ... rest of your product listing ... -->
+@foreach (Product p in Model.products)
+{
+    <partial name="ProductCard" model="p"></partial>
+}
+<div page-model="@Model.PaginationInfo" page-action="Index" page-classes-enabled="true" page-class="btn"
+     page-class-normal="btn-outline-dark" page-class-selected="btn-primary" class="btn-group pull-right m-1"></div>
