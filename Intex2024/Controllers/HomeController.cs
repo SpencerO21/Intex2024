@@ -2,8 +2,6 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Intex2024.Models;
 using Intex2024.Models.ViewModels;
-using Intex2024.Models.ViewModels;
-
 namespace Intex2024.Controllers;
 
 public class HomeController : Controller
