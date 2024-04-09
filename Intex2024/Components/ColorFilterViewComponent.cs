@@ -16,10 +16,10 @@ public class ColorFilterViewComponent : ViewComponent
         // ViewBag.SelectedColors = RouteData?.Values["color"];
 
         var colors = _repo.Products
+            .ToList()
             .SelectMany(x => new[] { x.PrimaryColor, x.SecondaryColor })
             .Distinct()
             .OrderBy(x => x)
-            .ToList()
             .AsQueryable(); // Convert the List<string?> to IQueryable<string?>
 
         return View(colors);
