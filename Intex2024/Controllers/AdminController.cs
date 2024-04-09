@@ -11,8 +11,7 @@ namespace Intex2024.Controllers
         {
             _repo = temp;
         }
-
-
+        
         public IActionResult ViewProducts(int pageSize = 10, int pageNum = 1)
         {
 
