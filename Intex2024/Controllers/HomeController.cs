@@ -14,6 +14,8 @@ public class HomeController : Controller
         _repo = temp;
     }
 
+
+    //[Authorize(Roles = "Admin, Manager")]
     public IActionResult Index(int pageSize = 5, int pageNum = 1)
     {
         
