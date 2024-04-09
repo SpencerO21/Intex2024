@@ -9,7 +9,7 @@
             No Filter
         </label>
     </div>
-    <div>SelectedColor from ViewBag: '@ViewBag.SelectedColors'</div>
+    
     @foreach (string color in Model ?? Enumerable.Empty<string>())
     {
         <div class="form-check">
