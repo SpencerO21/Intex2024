@@ -7,29 +7,27 @@ public partial class Transaction
 {
     public int TransactionId { get; set; }
 
-    public int? CustomerId { get; set; }
+    public long CustomerId { get; set; }
 
-    public DateOnly? Date { get; set; }
+    public DateOnly Date { get; set; }
 
-    public string? DayOfWeek { get; set; }
+    public string DayOfWeek { get; set; } = null!;
 
-    public TimeOnly? Time { get; set; }
+    public short Time { get; set; }
 
-    public string? EntryMode { get; set; }
+    public string EntryMode { get; set; } = null!;
 
-    public decimal? Amount { get; set; }
+    public short Amount { get; set; }
 
-    public string? TypeOfTransaction { get; set; }
+    public string TypeOfTransaction { get; set; } = null!;
 
-    public string? CountryOfTransaction { get; set; }
+    public string CountryOfTransaction { get; set; } = null!;
 
-    public string? ShippingAddress { get; set; }
+    public string ShippingAddress { get; set; } = null!;
 
-    public string? Bank { get; set; }
+    public string Bank { get; set; } = null!;
 
-    public string? TypeOfCard { get; set; }
+    public string TypeOfCard { get; set; } = null!;
 
-    public bool? Fraud { get; set; }
-
-    public virtual ICollection<LineItem> LineItems { get; set; } = new List<LineItem>();
+    public bool Fraud { get; set; }
 }

@@ -56,84 +56,78 @@ public partial class IntexStoreContext : DbContext
 
         modelBuilder.Entity<LineItem>(entity =>
         {
-            entity.HasKey(e => new { e.TransactionId, e.ProductId }).HasName("PK__LineItem__41B912684AE17A4E");
+            entity.HasNoKey();
 
-            entity.Property(e => e.TransactionId).HasColumnName("transaction_ID");
             entity.Property(e => e.ProductId).HasColumnName("product_ID");
             entity.Property(e => e.Qty).HasColumnName("qty");
             entity.Property(e => e.Rating).HasColumnName("rating");
-
-            entity.HasOne(d => d.Product).WithMany(p => p.LineItems)
-                .HasForeignKey(d => d.ProductId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__LineItems__produ__6383C8BA");
-
-            entity.HasOne(d => d.Transaction).WithMany(p => p.LineItems)
-                .HasForeignKey(d => d.TransactionId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__LineItems__trans__628FA481");
+            entity.Property(e => e.TransactionId).HasColumnName("transaction_ID");
         });
 
         modelBuilder.Entity<Product>(entity =>
         {
-            entity.HasKey(e => e.ProductId).HasName("PK__Products__470175FD74E1901B");
-
             entity.Property(e => e.ProductId)
                 .ValueGeneratedNever()
                 .HasColumnName("product_ID");
+            entity.Property(e => e.Category1)
+                .HasMaxLength(50)
+                .HasColumnName("category1");
+            entity.Property(e => e.Category2)
+                .HasMaxLength(50)
+                .HasColumnName("category2");
+            entity.Property(e => e.Category3)
+                .HasMaxLength(50)
+                .HasColumnName("category3");
+            entity.Property(e => e.Description)
+                .HasMaxLength(2750)
+                .HasColumnName("description");
             entity.Property(e => e.ImgLink)
-                .HasMaxLength(200)
+                .HasMaxLength(150)
                 .HasColumnName("img_link");
             entity.Property(e => e.Name)
                 .HasMaxLength(100)
                 .HasColumnName("name");
             entity.Property(e => e.NumParts).HasColumnName("num_parts");
-            entity.Property(e => e.Price)
-                .HasColumnType("decimal(10, 2)")
-                .HasColumnName("price");
+            entity.Property(e => e.Price).HasColumnName("price");
+            entity.Property(e => e.PrimaryColor)
+                .HasMaxLength(50)
+                .HasColumnName("primary_color");
+            entity.Property(e => e.SecondaryColor)
+                .HasMaxLength(50)
+                .HasColumnName("secondary_color");
             entity.Property(e => e.Year).HasColumnName("year");
         });
 
         modelBuilder.Entity<Transaction>(entity =>
         {
-            entity.HasKey(e => e.TransactionId).HasName("PK__Transact__85C90537F0967C02");
+            entity.HasNoKey();
 
-            entity.Property(e => e.TransactionId)
-                .ValueGeneratedNever()
-                .HasColumnName("transaction_ID");
-            entity.Property(e => e.Amount)
-                .HasColumnType("decimal(10, 2)")
-                .HasColumnName("amount");
+            entity.Property(e => e.Amount).HasColumnName("amount");
             entity.Property(e => e.Bank)
-                .HasMaxLength(100)
-                .IsUnicode(false)
+                .HasMaxLength(50)
                 .HasColumnName("bank");
             entity.Property(e => e.CountryOfTransaction)
                 .HasMaxLength(50)
-                .IsUnicode(false)
                 .HasColumnName("country_of_transaction");
             entity.Property(e => e.CustomerId).HasColumnName("customer_ID");
             entity.Property(e => e.Date).HasColumnName("date");
             entity.Property(e => e.DayOfWeek)
-                .HasMaxLength(10)
-                .IsUnicode(false)
+                .HasMaxLength(50)
                 .HasColumnName("day_of_week");
             entity.Property(e => e.EntryMode)
-                .HasMaxLength(20)
-                .IsUnicode(false)
+                .HasMaxLength(50)
                 .HasColumnName("entry_mode");
             entity.Property(e => e.Fraud).HasColumnName("fraud");
             entity.Property(e => e.ShippingAddress)
-                .HasMaxLength(255)
+                .HasMaxLength(50)
                 .HasColumnName("shipping_address");
             entity.Property(e => e.Time).HasColumnName("time");
+            entity.Property(e => e.TransactionId).HasColumnName("transaction_ID");
             entity.Property(e => e.TypeOfCard)
                 .HasMaxLength(50)
-                .IsUnicode(false)
                 .HasColumnName("type_of_card");
             entity.Property(e => e.TypeOfTransaction)
                 .HasMaxLength(50)
-                .IsUnicode(false)
                 .HasColumnName("type_of_transaction");
         });
 

@@ -20,3 +20,9 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.equal-height {
+  height: auto; /* This ensures the height is adjusted automatically */
+  object-fit: cover; /* This will cover the area without distorting the aspect ratio but might crop the image */
+  max-height: 10rem;
+}
