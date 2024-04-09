@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using Intex2024.Models.ViewModels;
-using Mission11.Models.ViewModels;
+using Intex2024.Models.ViewModels;
 
 namespace Mission11.Infrastructure;
 

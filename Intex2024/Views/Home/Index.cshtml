@@ -6,48 +6,45 @@
 
 
 
-@if (User.Identity.IsAuthenticated)
-{
-    <h1>Recommended for you</h1>
-    <div class="text-center">
-        <div class="row">
-            <div class="col">
-                <div class="card" style="width: 18rem;">
-                    <img src="https://www.lego.com/cdn/cs/set/assets/blt136fb371e68cccbd/60253.jpg?format=webply&fit=bounds&quality=75&width=800&height=800&dpr=1" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
+
+<h1>Recommended for you</h1>
+<div class="text-center">
+    <div class="row">
+        <div class="col">
+            <div class="card" style="width: 18rem;">
+                <img src="https://www.lego.com/cdn/cs/set/assets/blt136fb371e68cccbd/60253.jpg?format=webply&fit=bounds&quality=75&width=800&height=800&dpr=1" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
             </div>
-            <div class="col">
-                <div class="card" style="width: 18rem;">
-                    <img src="https://images.brickset.com/sets/images/7884-1.jpg?200805081137" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
+        </div>
+        <div class="col">
+            <div class="card" style="width: 18rem;">
+                <img src="https://images.brickset.com/sets/images/7884-1.jpg?200805081137" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
             </div>
-            <div class="col">
-                <div class="card" style="width: 18rem;">
-                    <img src="https://images.brickset.com/sets/images/7884-1.jpg?200805081137" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
+        </div>
+        <div class="col">
+            <div class="card" style="width: 18rem;">
+                <img src="https://images.brickset.com/sets/images/7884-1.jpg?200805081137" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
             </div>
         </div>
     </div>
-}
-
+</div>
 
 <h1>Products</h1>
-<form method="get" action="@Url.Action("Index", "Home")">
+<form method="get" action="@Url.Action("Index")">
     <label asp-for="SelectedPageSize" class="mr-2">Items per page:</label>
     <select asp-for="SelectedPageSize" class="form-control" onchange="this.form.submit()">
         <option value="5">5</option>

@@ -1,4 +1,4 @@
-namespace Mission11.Models.ViewModels;
+namespace Intex2024.Models.ViewModels;
 
 public class PaginationInfo
 {

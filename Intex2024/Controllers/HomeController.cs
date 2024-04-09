@@ -2,7 +2,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Intex2024.Models;
 using Intex2024.Models.ViewModels;
-using Mission11.Models.ViewModels;
+using Intex2024.Models.ViewModels;
 
 namespace Intex2024.Controllers;
 
@@ -36,8 +36,24 @@ public class HomeController : Controller
 
         return View(productsListViewModel);
     }
+    
+    public ActionResult ProductDetails(int id)
+    {
+        var product = _repo.Products.FirstOrDefault(x => x.ProductId == id);
+        if (product == null)
+        {
+            return NotFound();
+        }
+        return View(product);
+    }
+
 
     public IActionResult Privacy()
+    {
+        return View();
+    }
+
+    public IActionResult AboutUs()
     {
         return View();
     }
