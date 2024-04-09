@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
 namespace Intex2024.Models;
-
 public partial class Product
 {
     public short ProductId { get; set; }
@@ -29,3 +27,4 @@ public partial class Product
 
     public string? Category3 { get; set; }
 }
+

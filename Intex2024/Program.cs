@@ -23,6 +23,9 @@ builder.Services.AddDbContext<IntexStoreContext>(options =>
 builder.Services.AddScoped<IStoreRepository, EFStoreRepository>();
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession();
 
 var app = builder.Build();
 
@@ -40,6 +43,7 @@ else
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseSession();
 
 app.UseRouting();
 
@@ -59,5 +63,6 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.MapDefaultControllerRoute();
+app.MapRazorPages();
 
 app.Run();
