@@ -2,8 +2,6 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Intex2024.Models;
 using Intex2024.Models.ViewModels;
-using Intex2024.Models.ViewModels;
-
 namespace Intex2024.Controllers;
 
 public class HomeController : Controller
@@ -16,6 +14,8 @@ public class HomeController : Controller
         _repo = temp;
     }
 
+
+    //[Authorize(Roles = "Admin, Manager")]
     public IActionResult Index(int pageSize = 5, int pageNum = 1)
     {
         
