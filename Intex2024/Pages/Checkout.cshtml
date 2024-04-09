@@ -1,8 +1,7 @@
 ﻿@page
-@model Intex2024.Pages.CartModel
+@model Intex2024.Pages.CheckoutModel
 @{
 }
-
 <h2>Your Cart</h2>
 <table class="table table-bordered table-striped">
     <thead>
@@ -37,6 +36,6 @@
 </table>
 
 <div class="text-center">
-    <a class="btn btn-secondary" href="@Model.ReturnUrl">Continue Shopping</a>
-    <a class="btn btn-primary" href="/Checkout">Proceed to Checkout</a>
+    <a class="btn btn-secondary" href="/Cart">Go Back</a>
+    <a class="btn btn-primary" href="/Confirmation">Checkout</a>
 </div>
