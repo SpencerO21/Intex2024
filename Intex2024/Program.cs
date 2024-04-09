@@ -80,6 +80,11 @@ app.MapControllerRoute(
     defaults: new { Controller = "Home", action = "Index"});
 
 app.MapControllerRoute(
+    name: "paginationProductsAdmin",
+    pattern: "/Page/{pageNum}",
+    defaults: new { Controller = "Admin", action = "ViewProducts", pageNum = 1 });
+
+app.MapControllerRoute(
     name: "pagination",
     pattern: "Products/Page/{pageNum}", // Ensure this doesn't conflict with other patterns
     defaults: new { Controller = "Home", action = "Index", pageNum = 1 });
