@@ -13,6 +13,7 @@ public class HomeController : Controller
         _logger = logger;
     }
 
+    //[Authorize(Roles = "Admin, Manager")]
     public IActionResult Index()
     {
         return View();
