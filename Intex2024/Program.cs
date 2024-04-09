@@ -1,7 +1,11 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Intex2024.Data;
+
 using Microsoft.Extensions.DependencyInjection;
+
+using Intex2024.Models;
+
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -23,7 +27,18 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
+
+// SQL Server Database Configuration
+var storeConnectionString = builder.Configuration.GetConnectionString("StoreConnection") ??
+                            throw new InvalidOperationException("Connection string 'StoreConnection' not found.");
+builder.Services.AddDbContext<IntexStoreContext>(options =>
+    options.UseSqlServer(storeConnectionString));
+builder.Services.AddScoped<IStoreRepository, EFStoreRepository>();
+
 builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession();
 
 var app = builder.Build();
 
@@ -41,6 +56,7 @@ else
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseSession();
 
 app.UseRouting();
 
@@ -50,6 +66,17 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapRazorPages();
+app.MapControllerRoute(
+    name: "pagination",
+    pattern: "Products/{pageNum}/{pageSize}",
+    defaults: new { Controller = "Home", action = "Index" });
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapDefaultControllerRoute();
 app.MapRazorPages();
 
 app.Run();
