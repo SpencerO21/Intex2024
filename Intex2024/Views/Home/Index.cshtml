@@ -44,22 +44,75 @@
 </div>
 
 <h1>Products</h1>
-<form method="get" action="@Url.Action("Index")">
-    <label asp-for="SelectedPageSize" class="mr-2">Items per page:</label>
-    <select asp-for="SelectedPageSize" class="form-control" onchange="this.form.submit()">
-        <option value="5">5</option>
-        <option value="10">10</option>
-        <option value="20">20</option>
-        <!-- Add more options as needed -->
-    </select>
-</form>
-
-<h1>Products</h1>
-<!-- ... rest of your product listing ... -->
-
-@foreach (Product p in Model.products)
+@using (Html.BeginForm("Index", "Home", FormMethod.Get))
 {
-  <partial name="ProductCard" model="p"></partial>
+    <select name="pageSize" onchange="this.form.submit();">
+        @if (Model.SelectedPageSize == 5)
+        {
+            <option value="5" selected>5</option>
+        }
+        else
+        {
+            <option value="5">5</option>
+        }
+
+        @if (Model.SelectedPageSize == 10)
+        {
+            <option value="10" selected>10</option>
+        }
+        else
+        {
+            <option value="10">10</option>
+        }
+
+        @if (Model.SelectedPageSize == 20)
+        {
+            <option value="20" selected>20</option>
+        }
+        else
+        {
+            <option value="20">20</option>
+        }
+        
+    </select>
+    <input type="hidden" name="cat" value="@Model.currentCat" />
+    <input type="hidden" name="color" value="@Model.currentColor" />
+    <input type="hidden" name="pageNum" value="@Model.PaginationInfo.CurrentPage" />
 }
-<div page-model="@Model.PaginationInfo" page-action="Index" page-classes-enabled="true" page-class="btn" 
-     page-class-normal="btn-outline-dark" page-class-selected="btn-primary" class="btn-group pull-right m-1"></div>
+
+
+
+
+<div class="container">
+    <div class="row">
+        <!-- Filters Form Column -->
+        <div class="col-md-4">
+            <form method="get" action="@Url.Action("Index", "Home")">
+                <!-- Product Filter Scrollable Box -->
+                <div class="filter-box mb-3" style="max-height: 300px; overflow-y: auto;">
+                    <vc:product-filter></vc:product-filter>
+                </div>
+
+                <!-- Color Filter Scrollable Box -->
+                <div class="filter-box mb-3" style="max-height: 300px; overflow-y: auto;">
+                    <vc:color-filter></vc:color-filter>
+                </div>
+                
+                <input type="hidden" name="pageNum" value="@Model.PaginationInfo.CurrentPage" />
+                <button type="submit" class="btn btn-primary">Apply Filters</button>
+            </form>
+        </div>
+
+        <!-- Product Listings Column -->
+        <div class="col-md-8">
+            @foreach (Product p in Model.products)
+            {
+                <partial name="ProductCard" model="p"></partial>
+            }
+
+            <div page-model="@Model.PaginationInfo" page-action="Index" page-classes-enabled="true" page-class="btn" 
+                 page-class-normal="btn-outline-dark" page-class-selected="btn-primary" page-url-cat="@Model.currentCat" class="btn-group pull-right m-1"></div>
+        </div>
+    </div>
+</div>
+

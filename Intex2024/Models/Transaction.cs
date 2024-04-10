@@ -7,17 +7,17 @@ public partial class Transaction
 {
     public int TransactionId { get; set; }
 
-    public long CustomerId { get; set; }
+    public int CustomerId { get; set; }
 
     public DateOnly Date { get; set; }
 
     public string DayOfWeek { get; set; } = null!;
 
-    public short Time { get; set; }
+    public int Time { get; set; }
 
     public string EntryMode { get; set; } = null!;
 
-    public short Amount { get; set; }
+    public int Amount { get; set; }
 
     public string TypeOfTransaction { get; set; } = null!;
 
