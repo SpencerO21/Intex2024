@@ -41,42 +41,52 @@
 </div>
 
 <br />
-<h1>Products</h1><br />
-@using (Html.BeginForm("Index", "Home", FormMethod.Get))
-{
-    <select name="pageSize" onchange="this.form.submit();">
-        @if (Model.SelectedPageSize == 5)
-        {
-            <option value="5" selected>5</option>
-        }
-        else
-        {
-            <option value="5">5</option>
-        }
+<div class="row">
+    <div class="col-md-9">
+        <h1>Products</h1>
+    </div>
 
-        @if (Model.SelectedPageSize == 10)
+    <div class="col-md-3" style="text-align: right;">
+        <p>Items per page</p>
+        @using (Html.BeginForm("Index", "Home", FormMethod.Get))
         {
-            <option value="10" selected>10</option>
-        }
-        else
-        {
-            <option value="10">10</option>
-        }
+            <select name="pageSize" onchange="this.form.submit();">
+                @if (Model.SelectedPageSize == 5)
+                {
+                    <option value="5" selected>5</option>
+                }
+                else
+                {
+                    <option value="5">5</option>
+                }
 
-        @if (Model.SelectedPageSize == 20)
-        {
-            <option value="20" selected>20</option>
+                @if (Model.SelectedPageSize == 10)
+                {
+                    <option value="10" selected>10</option>
+                }
+                else
+                {
+                    <option value="10">10</option>
+                }
+
+                @if (Model.SelectedPageSize == 20)
+                {
+                    <option value="20" selected>20</option>
+                }
+                else
+                {
+                    <option value="20">20</option>
+                }
+
+            </select>
+            <input type="hidden" name="cat" value="@Model.currentCat" />
+            <input type="hidden" name="color" value="@Model.currentColor" />
+            <input type="hidden" name="pageNum" value="@Model.PaginationInfo.CurrentPage" />
         }
-        else
-        {
-            <option value="20">20</option>
-        }
-        
-    </select>
-    <input type="hidden" name="cat" value="@Model.currentCat" />
-    <input type="hidden" name="color" value="@Model.currentColor" />
-    <input type="hidden" name="pageNum" value="@Model.PaginationInfo.CurrentPage" />
-}<br />
+    </div>
+</div><br />
+
+
 
 
 
