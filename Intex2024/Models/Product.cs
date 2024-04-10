@@ -23,6 +23,12 @@ public partial class Product
 
     public string Description { get; set; } = null!;
 
+    public short? RelatedItem1 { get; set; }
+
+    public short? RelatedItem2 { get; set; }
+
+    public short? RelatedItem3 { get; set; }
+
     public string Category1 { get; set; } = null!;
 
     public string? Category2 { get; set; }

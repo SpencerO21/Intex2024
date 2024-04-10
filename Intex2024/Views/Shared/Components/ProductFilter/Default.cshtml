@@ -1,0 +1,20 @@
+@model IQueryable<string>
+
+<div class="d-grid gap-2">
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="cat" value="" id="catNone" @(ViewBag.SelectedCategory == null ? "checked" : "")>
+        <label class="form-check-label" for="catNone">
+            No filter
+        </label>
+    </div>
+    
+    @foreach (string cat in Model ?? Enumerable.Empty<string>())
+    {
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="cat" value="@cat" id="cat@cat" @(cat == ViewBag.SelectedCategory ? "checked" : "")>
+            <label class="form-check-label" for="cat@cat">
+                @cat
+            </label>
+        </div>
+    }
+</div>

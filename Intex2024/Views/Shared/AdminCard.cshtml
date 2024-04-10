@@ -1,0 +1,30 @@
+﻿@model Product
+
+<div class="card m-1 p-1">
+    <div class="row">
+        <div class="col">
+            <h6>@Model.Name</h6>
+        </div>
+        <div class="col">
+            <p>$@Model.Price</p>
+        </div>
+        <div class="col">
+            @if (!string.IsNullOrEmpty(Model.Category2) && !string.IsNullOrEmpty(Model.Category3))
+            {
+                <p>@Model.Category1 - @Model.Category2 - @Model.Category3</p>
+            }
+            else if (!string.IsNullOrEmpty(Model.Category2))
+            {
+                <p>@Model.Category1 - @Model.Category2</p>
+            }
+            else
+            {
+                <p>@Model.Category1</p>
+            }
+        </div>
+        <div class="col">
+            <a class="btn btn-primary" asp-controller="Admin" asp-action="EditProduct" asp-route-id="@Model.ProductId">Edit</a>
+            <a class="btn btn-danger">Delete</a>
+        </div>
+    </div>
+</div>

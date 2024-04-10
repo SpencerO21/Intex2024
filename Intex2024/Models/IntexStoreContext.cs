@@ -31,8 +31,6 @@ public partial class IntexStoreContext : DbContext
     {
         modelBuilder.Entity<Customer>(entity =>
         {
-            entity.HasKey(e => e.CustomerId).HasName("PK__Customer__CD64CFDD6070FEBD");
-
             entity.Property(e => e.CustomerId)
                 .ValueGeneratedNever()
                 .HasColumnName("customer_ID");
@@ -45,13 +43,14 @@ public partial class IntexStoreContext : DbContext
                 .HasMaxLength(50)
                 .HasColumnName("first_name");
             entity.Property(e => e.Gender)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength()
+                .HasMaxLength(50)
                 .HasColumnName("gender");
             entity.Property(e => e.LastName)
                 .HasMaxLength(50)
                 .HasColumnName("last_name");
+            entity.Property(e => e.RelatedItem1).HasColumnName("related_item1");
+            entity.Property(e => e.RelatedItem2).HasColumnName("related_item2");
+            entity.Property(e => e.RelatedItem3).HasColumnName("related_item3");
         });
 
         modelBuilder.Entity<LineItem>(entity =>
@@ -66,9 +65,8 @@ public partial class IntexStoreContext : DbContext
 
         modelBuilder.Entity<Product>(entity =>
         {
-            entity.Property(e => e.ProductId)
-                .ValueGeneratedNever()
-                .HasColumnName("product_ID");
+            entity.HasNoKey();
+
             entity.Property(e => e.Category1)
                 .HasMaxLength(50)
                 .HasColumnName("category1");
@@ -92,6 +90,10 @@ public partial class IntexStoreContext : DbContext
             entity.Property(e => e.PrimaryColor)
                 .HasMaxLength(50)
                 .HasColumnName("primary_color");
+            entity.Property(e => e.ProductId).HasColumnName("product_ID");
+            entity.Property(e => e.RelatedItem1).HasColumnName("related_item1");
+            entity.Property(e => e.RelatedItem2).HasColumnName("related_item2");
+            entity.Property(e => e.RelatedItem3).HasColumnName("related_item3");
             entity.Property(e => e.SecondaryColor)
                 .HasMaxLength(50)
                 .HasColumnName("secondary_color");
@@ -100,8 +102,9 @@ public partial class IntexStoreContext : DbContext
 
         modelBuilder.Entity<Transaction>(entity =>
         {
-            entity.HasNoKey();
-
+            entity.Property(e => e.TransactionId)
+                .ValueGeneratedNever()
+                .HasColumnName("transaction_ID");
             entity.Property(e => e.Amount).HasColumnName("amount");
             entity.Property(e => e.Bank)
                 .HasMaxLength(50)
@@ -122,7 +125,6 @@ public partial class IntexStoreContext : DbContext
                 .HasMaxLength(50)
                 .HasColumnName("shipping_address");
             entity.Property(e => e.Time).HasColumnName("time");
-            entity.Property(e => e.TransactionId).HasColumnName("transaction_ID");
             entity.Property(e => e.TypeOfCard)
                 .HasMaxLength(50)
                 .HasColumnName("type_of_card");

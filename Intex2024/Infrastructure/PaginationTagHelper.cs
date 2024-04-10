@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using Intex2024.Models.ViewModels;
-using Mission11.Models.ViewModels;
+using Intex2024.Models.ViewModels;
 
 namespace Mission11.Infrastructure;
 
@@ -22,6 +22,9 @@ public class PaginationTagHelper : TagHelper
     [HtmlAttributeNotBound]
     public ViewContext? ViewContext { get; set; }
     public string? PageAction { get; set; }
+    
+    [HtmlAttributeName(DictionaryAttributePrefix = "page-url-")]
+    public Dictionary<string, object> PageUrlValues { get; set; } = new Dictionary<string, object>();
     public PaginationInfo PageModel { get; set; }
 
     public bool PageClassesEnabled { get; set; } = false;
@@ -36,11 +39,13 @@ public class PaginationTagHelper : TagHelper
         {
             IUrlHelper urlHelper = _urlHelperFactory.GetUrlHelper(ViewContext);
             TagBuilder result = new TagBuilder("div");
+            
 
-            for (int i = 1; i < PageModel.TotalNumPages; i++)
+            for (int i = 1; i < PageModel.TotalNumPages + 1; i++)
             {
                 TagBuilder tag = new TagBuilder("a");
-                tag.Attributes["href"] = urlHelper.Action(PageAction, new { pageNum = i });
+                PageUrlValues["pageNum"] = i;
+                tag.Attributes["href"] = urlHelper.Action(PageAction, PageUrlValues);
 
                 if (PageClassesEnabled)
                 {
