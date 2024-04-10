@@ -34,7 +34,7 @@ namespace Intex2024.Controllers
             return View(productsListViewModel);
         }
 
-        public IActionResult ViewOrders(int pageSize = 200, int pageNum = 1)
+        public IActionResult ViewOrders(bool? fraud, int pageSize = 200, int pageNum = 1)
         {
 
             var orderListViewModel = new OrderListViewModel()
@@ -47,6 +47,7 @@ namespace Intex2024.Controllers
                 },
                 SelectedPageSize = pageSize,
                 transactions = _repo.Transactions
+                    .Where(x => x.Fraud == fraud)
                     .OrderByDescending(x => x.Date)
                     .Skip((pageNum - 1) * pageSize)
                     .Take(pageSize),
