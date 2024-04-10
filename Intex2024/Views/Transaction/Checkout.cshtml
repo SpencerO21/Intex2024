@@ -1,0 +1,111 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model Transaction
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Check Out</title>
+</head>
+<body>
+    <h1>Check out</h1>
+    <h6>Please enter your details, and we'll ship your goods right away!</h6>
+
+    <form asp-action="Checkout" method="post">
+        <div>
+            <input asp-for= "TransactionId" type="hidden"/>
+            <input asp-for="CustomerId" type="hidden" />
+            <input asp-for="Fraud" type="hidden" />
+        </div>
+        <div>
+            <label asp-for="Date">Date:</label>
+            <input asp-for="Date" />
+        </div>
+        <div>
+            <label asp-for="DayOfWeek">Day of Week:</label>
+            <select asp-for= "DayOfWeek">
+                <option value = "Sunday" > Sunday </option>
+                <option value = "Monday" > Monday </option>
+                <option value = "Tuesdsay" > Tuesday </option>
+                <option value = "Wednesday" > Wednesday </option >
+                <option value="Thursday"> Thursday </option>
+                <option value="Friday"> Friday </option>
+                <option value="Saturday"> Saturday </option>
+            </select>
+        </div>
+        <div>
+            <label asp-for="Time">Time:</label>
+            <input asp-for="Time" />
+            //get current time
+        </div>
+        <div>
+            <label asp-for="EntryMode">Entry Mode:</label>
+            <select asp-for="EntryMode">
+                <option value="CVC"> CVC </option>
+                <option value="Tap"> Tap </option>
+                <option value="PIN"> PIN </option>
+            </select>
+        </div>
+        <div>
+            <label asp-for="Amount">Amount:</label>
+            //get this from the right table
+        </div>
+        <div>
+            <label asp-for="TypeOfTransaction">Type of Transaction:</label>
+            <select asp-for="TypeOfTransaction">
+                <option value="POS"> POS </option>
+                <option value="ATM"> ATM </option>
+                <option value="Online"> Online </option>
+            </select>
+        </div>
+        <div>
+            <label asp-for="CountryOfTransaction">Country:</label>
+            <select asp-for="CountryOfTransaction">
+                <option value="India"> India </option>
+                <option value="Russia"> Russia </option>
+                <option value="United Kingdom"> United Kingdom </option>
+                <option value="USA"> USA </option>
+                <option value="China"> China </option>
+            </select>
+        </div>
+        <div>
+            <label asp-for="ShippingAddress">Shipping Address:</label>
+            <select asp-for="ShippingAddress">
+                <option value="India"> India </option>
+                <option value="Russia"> Russia </option>
+                <option value="United Kingdom"> United Kingdom </option>
+                <option value="USA"> USA </option>
+                <option value="China"> China </option>
+            </select>
+        </div>
+        <div>
+            <label asp-for="Bank">Bank:</label>
+            <select asp-for="Bank" >
+                <option value="HSBC"> HSBC </option>
+                <option value="Halifax"> Halifax </option>
+                <option value="Lloyds"> Lloyds </option>
+                <option value="Metro"> Metro </option>
+                <option value="Monzo"> Monzo </option>
+                <option value="RBS"> RBS </option>
+                <option value="Barclays"> Barclay </option>
+            </select>
+
+        </div>
+        <div>
+            <label asp-for="TypeOfCard">Type of Card:</label>
+            <select asp-for="TypeOfCard">
+                <option value="Visa"> Visa </option>
+                <option value="MasterCard"> MasterCard </option>
+            </select>
+
+        </div>
+        <div class="text-center">
+            <input class="btn btn-primary" type="submit"
+                   value="Complete Order" />
+        </div>
+    </form>
+</body>
+</html>

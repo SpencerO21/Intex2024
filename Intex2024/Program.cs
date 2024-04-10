@@ -35,11 +35,16 @@ var storeConnectionString = builder.Configuration.GetConnectionString("StoreConn
 builder.Services.AddDbContext<IntexStoreContext>(options =>
     options.UseSqlServer(storeConnectionString));
 builder.Services.AddScoped<IStoreRepository, EFStoreRepository>();
+builder.Services.AddScoped<ITransactionRepository, EFTransactionRepository>();
+
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession();
+
+builder.Services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 var app = builder.Build();
 

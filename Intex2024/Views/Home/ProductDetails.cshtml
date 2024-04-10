@@ -3,11 +3,14 @@
     ViewData["Title"] = "Product Details";
 }
 @model Product
+<head>
+    <link href="~/css/site.css" rel="stylesheet" />
+</head>
 
 <div class="container">
     <div class="row">
         <div class="col-md-6">
-            <img src="@Model.ImgLink" class="img-fluid" alt="Product Image">
+            <img src="@Model.ImgLink" class="image" alt="Product Image">
             <div class="mt-3">
                 <h2 class="mb-0">Related Products:</h2>
                 <div class="row mt-3">

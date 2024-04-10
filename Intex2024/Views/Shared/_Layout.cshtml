@@ -7,7 +7,11 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
     <link rel="stylesheet" href="~/Intex2024.styles.css" asp-append-version="true"/>
+
+    <link rel="stylesheet" href="~/lib//font-awesome/css/all.min.css" />
+
     <meta name="google-signin-client_id" content="743101861809-j38t3d8cur8nm29hmb2384gtmeigjajk.apps.googleusercontent.com" />
+
 </head>
 <body>
 <header>
@@ -31,6 +35,11 @@
                     </li>
                 </ul>
                 <partial name="_LoginPartial"/>
+            </div>
+            <div class="row">
+                <div class="col-6 navbar-text text-end">
+                    <vc:cart-summary/>
+                </div>
             </div>
         </div>
     </nav>
