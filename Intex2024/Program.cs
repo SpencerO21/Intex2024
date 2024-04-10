@@ -65,18 +65,18 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
-    name: "productDetails",
-    pattern: "Products/{color}/{cat}/{pageNum}",
-    defaults: new { Controller = "Home", action = "Index" });
+    name: "paginationWithPageSize",
+    pattern: "Products/{color}/{cat}/{pageNum}/{pageSize?}", // Adding pageSize as an optional parameter
+    defaults: new { Controller = "Home", action = "Index"});
 
 app.MapControllerRoute(
-    name: "productByCategory",
-    pattern: "Category/{cat}/{pageNum?}", // Use a distinct path segment to differentiate
-    defaults: new { Controller = "Home", action = "Index" });
+    name: "productByCategoryWithPageSize",
+    pattern: "Category/{cat}/{pageNum}/{pageSize?}", // Adding pageSize as an optional parameter
+    defaults: new { Controller = "Home", action = "Index"});
 
 app.MapControllerRoute(
-    name: "productByColor",
-    pattern: "Color/{color}/{pageNum?}", // Use a distinct path segment to differentiate
+    name: "productByColorWithPageSize",
+    pattern: "Color/{color}/{pageNum}/{pageSize?}", // Adding pageSize as an optional parameter
     defaults: new { Controller = "Home", action = "Index"});
 
 app.MapControllerRoute(

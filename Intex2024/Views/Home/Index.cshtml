@@ -44,15 +44,51 @@
 </div>
 
 <h1>Products</h1>
-<form method="get" action="@Url.Action("Index")">
-    <label asp-for="SelectedPageSize" class="mr-2">Items per page:</label>
-    <select asp-for="SelectedPageSize" class="form-control" onchange="this.form.submit()">
-        <option value="5">5</option>
-        <option value="10">10</option>
-        <option value="20">20</option>
-        <!-- Add more options as needed -->
+@using (Html.BeginForm("Index", "Home", FormMethod.Get))
+{
+    <select name="pageSize" onchange="this.form.submit();">
+        @if (Model.SelectedPageSize == 5)
+        {
+            <option value="5" selected>5</option>
+        }
+        else
+        {
+            <option value="5">5</option>
+        }
+
+        @if (Model.SelectedPageSize == 10)
+        {
+            <option value="10" selected>10</option>
+        }
+        else
+        {
+            <option value="10">10</option>
+        }
+
+        @if (Model.SelectedPageSize == 20)
+        {
+            <option value="20" selected>20</option>
+        }
+        else
+        {
+            <option value="20">20</option>
+        }
+
+        @if (Model.SelectedPageSize == 50)
+        {
+            <option value="50" selected>50</option>
+        }
+        else
+        {
+            <option value="50">50</option>
+        }
     </select>
-</form>
+    <input type="hidden" name="cat" value="@Model.currentCat" />
+    <input type="hidden" name="color" value="@Model.currentColor" />
+    <input type="hidden" name="pageNum" value="@Model.PaginationInfo.CurrentPage" />
+}
+
+
 
 
 <div class="container">
