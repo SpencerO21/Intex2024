@@ -1,0 +1,22 @@
+@model IQueryable<string>
+
+<!-- This assumes you have a model of type IQueryable<string> for your color options -->
+
+<div class="d-grid gap-2">
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="color" value="" id="colorNone" @(ViewBag.SelectedColors == null ? "checked" : "")>
+        <label class="form-check-label" for="colorNone">
+            No Filter
+        </label>
+    </div>
+    
+    @foreach (string color in Model ?? Enumerable.Empty<string>())
+    {
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="color" value="@color" id="color@color" @(color == ViewBag.SelectedColors ? "checked" : "")>
+            <label class="form-check-label" for="color@color">
+                @color
+            </label>
+        </div>
+    }
+</div>

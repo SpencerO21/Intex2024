@@ -3,6 +3,13 @@
 @inject UserManager<IdentityUser> UserManager
 
 <ul class="navbar-nav">
+    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+    {
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="AdminPortal">Admin Portal</a>
+    </li>
+    }
+    
     @if (SignInManager.IsSignedIn(User))
     {
         <li class="nav-item">

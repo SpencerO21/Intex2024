@@ -8,4 +8,6 @@ public class ProductListViewModel
     public PaginationInfo PaginationInfo { get; set; } = new PaginationInfo();
     public int SelectedPageSize { get; set; }
     
+    public string? currentCat { get; set; }
+    public string? currentColor { get; set; }
 }

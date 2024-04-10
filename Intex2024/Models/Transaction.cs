@@ -7,16 +7,18 @@ namespace Intex2024.Models;
 
 public partial class Transaction
 {
+
     public int TransactionId { get; set; }
-    public ICollection<CartLine> Lines { get; set; }
-            = new List<CartLine>();
-    public long CustomerId { get; set; }
+
+    public int CustomerId { get; set; }
+
 
     [Required(ErrorMessage = "Please enter a Date")]
     public DateOnly Date { get; set; }
 
     [Required(ErrorMessage = "Please enter a Day of the week")]
     public string DayOfWeek { get; set; } = null!;
+
 
     [Required(ErrorMessage = "Please enter a time")]
     public short Time { get; set; }
@@ -26,6 +28,7 @@ public partial class Transaction
 
     [Required(ErrorMessage = "Please enter an amount")]
     public short Amount { get; set; }
+
 
     [Required(ErrorMessage = "Please enter a type of transaction")]
     public string TypeOfTransaction { get; set; } = null!;
