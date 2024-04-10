@@ -47,5 +47,18 @@ namespace Intex2024.Controllers
             return RedirectToAction("ViewProducts");
         }
 
+        [HttpGet]
+        public IActionResult DeleteProduct(short id)
+        {
+            var recordToDelete = _repo.Products.Single(x => x.ProductId == id);
+            return View("DeleteConfirmation", recordToDelete);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteProduct(Product product)
+        {
+            _repo.RemoveProduct(product);
+            return RedirectToAction("ViewProducts");
+        }
     }
 }
