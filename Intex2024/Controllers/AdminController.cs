@@ -1,9 +1,11 @@
 ﻿using Intex2024.Models;
 using Intex2024.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Intex2024.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private IStoreRepository _repo;
@@ -125,6 +127,11 @@ namespace Intex2024.Controllers
 
             return View(custListViewModel);
 
+        }
+
+        public IActionResult AdminPortal()
+        {
+             return View();
         }
     }
 }
