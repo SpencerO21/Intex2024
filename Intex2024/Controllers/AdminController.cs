@@ -11,8 +11,7 @@ namespace Intex2024.Controllers
         {
             _repo = temp;
         }
-
-
+        
         public IActionResult ViewProducts(int pageSize = 10, int pageNum = 1)
         {
 
@@ -33,6 +32,56 @@ namespace Intex2024.Controllers
 
             return View(productsListViewModel);
         }
+
+
+        [HttpGet]
+        public IActionResult EditProduct(short id)
+        {
+            var recordToEdit = _repo.GetProductById(id);
+            return View(recordToEdit);
+        }
+
+        [HttpPost]
+        public IActionResult EditProduct(Product updatedProduct)
+        {
+            _repo.UpdateProduct(updatedProduct);
+            return RedirectToAction("ViewProducts");
+        }
+
+        [HttpGet]
+        public IActionResult DeleteProduct(short id)
+        {
+            var recordToDelete = _repo.Products.Single(x => x.ProductId == id);
+            return View("DeleteConfirmation", recordToDelete);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteProduct(Product product)
+        {
+            _repo.RemoveProduct(product);
+            return RedirectToAction("ViewProducts");
+        }
+
+        [HttpGet]
+        public IActionResult AddProduct()
+        {
+            return View("EditProduct", new Product());
+        }
+
+        [HttpPost]
+        public IActionResult AddProduct(Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                var lastProduct = _repo.Products.OrderByDescending(t => t.ProductId).FirstOrDefault();
+                product.ProductId = (short)(lastProduct.ProductId + 1);
+                _repo.AddProduct(product);
+                return RedirectToAction("ViewProducts");
+            }
+            else
+            {
+                return View("EditProduct", product);
+            }
 
         public IActionResult ViewOrders(int pageSize = 200, int pageNum = 1)
         {
@@ -73,6 +122,7 @@ namespace Intex2024.Controllers
             };
 
             return View(custListViewModel);
+
         }
     }
 }

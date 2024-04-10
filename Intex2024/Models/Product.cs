@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
+
 namespace Intex2024.Models;
 public partial class Product
 {
+    [Key]
     public short ProductId { get; set; }
 
     public string Name { get; set; } = null!;

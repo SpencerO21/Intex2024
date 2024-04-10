@@ -3,7 +3,7 @@
 @model Intex2024.Models.ViewModels.ProductListViewModel
 
 <h1>Products</h1>
-
+<a class="btn btn-primary" asp-controller="Admin" asp-action="AddProduct">Add Product</a>
 
 <div class="card m-1 p-1">
     <div class="row">
@@ -26,5 +26,6 @@
 {
     <partial name="AdminCard" model="p"></partial>
 }
-<div page-model="@Model.PaginationInfo" page-action="Index" page-classes-enabled="true" page-class="btn"
+<div page-model="@Model.PaginationInfo" page-action="ViewProducts" page-classes-enabled="true" page-class="btn"
      page-class-normal="btn-outline-dark" page-class-selected="btn-primary" class="btn-group pull-right m-1"></div>
+     
