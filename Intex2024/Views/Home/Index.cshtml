@@ -4,13 +4,10 @@
 @model Intex2024.Models.ViewModels.ProductListViewModel
 
 
-
-
-
-<h1>Recommended for you</h1>
+<h1>Recommended for you</h1><br />
 <div class="text-center">
     <div class="row">
-        <div class="col">
+        <div class="col-md-4 d-flex justify-content-center align-items-center">
             <div class="card" style="width: 18rem;">
                 <img src="https://www.lego.com/cdn/cs/set/assets/blt136fb371e68cccbd/60253.jpg?format=webply&fit=bounds&quality=75&width=800&height=800&dpr=1" class="card-img-top" alt="...">
                 <div class="card-body">
@@ -20,9 +17,9 @@
                 </div>
             </div>
         </div>
-        <div class="col">
+        <div class="col-md-4 d-flex justify-content-center align-items-center">
             <div class="card" style="width: 18rem;">
-                <img src="https://images.brickset.com/sets/images/7884-1.jpg?200805081137" class="card-img-top" alt="...">
+                <img src="https://images.brickset.com/sets/large/71017-7.jpg?201611220640" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Card title</h5>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -30,9 +27,9 @@
                 </div>
             </div>
         </div>
-        <div class="col">
+        <div class="col-md-4 d-flex justify-content-center align-items-center">
             <div class="card" style="width: 18rem;">
-                <img src="https://images.brickset.com/sets/images/7884-1.jpg?200805081137" class="card-img-top" alt="...">
+                <img src="https://www.lego.com/cdn/cs/set/assets/blt46a07a9b068b46c2/40174.jpg?format=webply&fit=bounds&quality=75&width=800&height=800&dpr=1" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Card title</h5>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -43,7 +40,8 @@
     </div>
 </div>
 
-<h1>Products</h1>
+<br />
+<h1>Products</h1><br />
 @using (Html.BeginForm("Index", "Home", FormMethod.Get))
 {
     <select name="pageSize" onchange="this.form.submit();">
@@ -78,7 +76,7 @@
     <input type="hidden" name="cat" value="@Model.currentCat" />
     <input type="hidden" name="color" value="@Model.currentColor" />
     <input type="hidden" name="pageNum" value="@Model.PaginationInfo.CurrentPage" />
-}
+}<br />
 
 
 
