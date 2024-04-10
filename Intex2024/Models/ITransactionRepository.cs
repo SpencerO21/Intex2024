@@ -3,6 +3,6 @@
     public interface ITransactionRepository
     {
         IQueryable<Transaction> Transcations { get; }
-        void SaveOrder(Transaction transaction);
+        void SaveOrder(Transaction transaction, List<LineItem> lineItems);
     }
 }

@@ -1,42 +1,56 @@
 ﻿using Microsoft.CodeAnalysis;
 
 namespace Intex2024.Models;
-public class Cart
-{
-    public List<CartLine> Lines { get; set; } = new List<CartLine>();
 
-    public virtual void AddItem(Product p, int quantity)
+public class Cart
+
+{
+
+    private IStoreRepository _repo;
+    public Cart(IStoreRepository temp) 
+    { 
+        _repo = temp;
+    }
+    public List<LineItem> Lines { get; set; } = new List<LineItem>();
+
+    public virtual void AddItem(int transactionId, short productId, int quantity)
     {
-        CartLine? line = Lines
-            .Where(x => x.Product.ProductId == p.ProductId)
+        LineItem? line = Lines
+            .Where(x => x.TransactionId == transactionId)
             .FirstOrDefault();
+
+        Product product = _repo.Products.FirstOrDefault(x => x.ProductId == productId);
 
         //Has this item already been added to our cart?
         if (line == null)
         {
-            Lines.Add(new CartLine()
+            Lines.Add(new LineItem()
             {
-                Product = p,
-                Quantity = quantity
+                ProductId = product.ProductId,
+                Qty = quantity
+
             });
         }
         else
         {
-            line.Quantity += quantity;
+            line.Qty += quantity;
         }
     }
 
-    public virtual void RemoveLine(Product prod) => Lines.RemoveAll(x => x.Product.ProductId == prod.ProductId);
+    public virtual void RemoveLine(Product prod) => Lines.RemoveAll(x => x.ProductId == prod.ProductId);
 
     public virtual void Clear() => Lines.Clear();
 
-    public decimal CalculateTotal() => Lines.Sum(x => x.Product.Price * x.Quantity);
-    public class CartLine
+    public decimal CalculateTotal()
     {
-        public int CartLineId { get; set; }
-        public Product Product { get; set; } = new();
-        public int Quantity { get; set; }
-
+        decimal total = 0;
+        foreach (LineItem line in Lines)
+        {
+            Product product = _repo.Products.FirstOrDefault(x => x.ProductId == line.ProductId);
+            total += (product.Price * line.Qty);
+        }
+        return total;
     }
-}
 
+
+}

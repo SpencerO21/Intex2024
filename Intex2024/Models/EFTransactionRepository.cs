@@ -12,15 +12,16 @@ namespace Intex2024.Models
             context = ctx;
         }
 
-        public IQueryable<Transaction> Transactions => context.Transactions
-                            .Include(o => o.Lines)
-                            .ThenInclude(l => l.Product);
+        public IQueryable<Transaction> Transactions => context.Transactions;
+                            
 
         public IQueryable<Transaction> Transcations => throw new NotImplementedException();
 
-        public void SaveOrder(Transaction transaction)
+        public void SaveOrder(Transaction transaction, List<LineItem> lineItems)
         {
-            context.AttachRange(transaction.Lines.Select(l => l.Product));
+            // for loop to Add line items to database
+
+            
             if (transaction.TransactionId == 0)
             {
                 context.Transactions.Add(transaction);

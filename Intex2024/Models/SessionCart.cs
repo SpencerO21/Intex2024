@@ -19,9 +19,9 @@ namespace Intex2024.Models
         [JsonIgnore]
         public ISession? Session { get; set; }
 
-        public override void AddItem(Product product, int quantity)
+        public override void AddItem(int transactionId, short productId, int quantity)
         {
-            base.AddItem(product, quantity);
+            base.AddItem(transactionId, productId, quantity);
             Session?.SetJson("Cart", this);
         }
 
