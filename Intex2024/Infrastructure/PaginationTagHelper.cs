@@ -41,7 +41,7 @@ public class PaginationTagHelper : TagHelper
             TagBuilder result = new TagBuilder("div");
             
 
-            for (int i = 1; i < PageModel.TotalNumPages; i++)
+            for (int i = 1; i < PageModel.TotalNumPages + 1; i++)
             {
                 TagBuilder tag = new TagBuilder("a");
                 PageUrlValues["pageNum"] = i;

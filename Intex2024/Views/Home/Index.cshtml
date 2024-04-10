@@ -73,15 +73,7 @@
         {
             <option value="20">20</option>
         }
-
-        @if (Model.SelectedPageSize == 50)
-        {
-            <option value="50" selected>50</option>
-        }
-        else
-        {
-            <option value="50">50</option>
-        }
+        
     </select>
     <input type="hidden" name="cat" value="@Model.currentCat" />
     <input type="hidden" name="color" value="@Model.currentColor" />
