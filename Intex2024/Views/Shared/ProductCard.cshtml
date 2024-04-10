@@ -5,12 +5,12 @@
     <div class="row">
         <img src="@Model.ImgLink" class="card-img-top w-25 equal-height" alt="...">
         <div class="col">
-            <a href="@Url.Action("ProductDetails", "Home", new { id = Model.ProductId })" class="product-link">
-                <h3>@Model.Name</h3>
+            <a href="@Url.Action("ProductDetails", "Home", new { id = Model.ProductId })" class="product-link" style="color: #444; text-decoration: none;">
+                <h3 style="color: #444;">@Model.Name</h3>
             </a>
-            <h3>$@Model.Price</h3>
+            <h3 style="color: #444;">$@Model.Price</h3>
         </div>
-
     </div>
 </div>
+
 
