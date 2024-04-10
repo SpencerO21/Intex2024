@@ -82,6 +82,7 @@ namespace Intex2024.Controllers
             {
                 return View("EditProduct", product);
             }
+        }
 
         public IActionResult ViewOrders(int pageSize = 200, int pageNum = 1)
         {
@@ -103,6 +104,7 @@ namespace Intex2024.Controllers
 
             return View(orderListViewModel);
         }
+        
         public IActionResult ViewCust(int pageSize = 100, int pageNum = 1)
         {
 
