@@ -32,5 +32,20 @@ namespace Intex2024.Controllers
 
             return View(productsListViewModel);
         }
+
+        [HttpGet]
+        public IActionResult EditProduct(short id)
+        {
+            var recordToEdit = _repo.Products.Single(x => x.ProductId == id);
+            return View(recordToEdit);
+        }
+
+        [HttpPost]
+        public IActionResult EditProduct(Product updatedProduct)
+        {
+            _repo.UpdateProduct(updatedProduct);
+            return RedirectToAction("ViewProducts");
+        }
+
     }
 }
