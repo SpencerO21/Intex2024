@@ -22,15 +22,15 @@ public class HomeController : Controller
         _context = context;
         _logger = logger;
         _repo = temp;
-        try
-        {
-            _session = new InferenceSession("C: /Users/eliasbaker/Source/Repos/Intex2024/Intex2024/fraudModel.onnx");
-            _logger.LogInformation("ONNX model loaded successfully");
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError($"Error loading the ONNX model: {ex.Message}");
-        }
+        //try
+        //{
+        //    _session = new InferenceSession("C: /Users/eliasbaker/Source/Repos/Intex2024/Intex2024/fraudModel.onnx");
+        //    _logger.LogInformation("ONNX model loaded successfully");
+        //}
+        //catch (Exception ex)
+        //{
+        //    _logger.LogError($"Error loading the ONNX model: {ex.Message}");
+        //}
     }
 
 
