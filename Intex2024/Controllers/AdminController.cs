@@ -33,6 +33,7 @@ namespace Intex2024.Controllers
             return View(productsListViewModel);
         }
 
+
         [HttpGet]
         public IActionResult EditProduct(short id)
         {
@@ -81,6 +82,47 @@ namespace Intex2024.Controllers
             {
                 return View("EditProduct", product);
             }
+
+        public IActionResult ViewOrders(int pageSize = 200, int pageNum = 1)
+        {
+
+            var orderListViewModel = new OrderListViewModel()
+            {
+                PaginationInfo = new PaginationInfo
+                {
+                    CurrentPage = pageNum,
+                    ItemsPerPage = pageSize,
+                    TotalItems = _repo.Transactions.Count()
+                },
+                SelectedPageSize = pageSize,
+                transactions = _repo.Transactions
+                    .OrderByDescending(x => x.Date)
+                    .Skip((pageNum - 1) * pageSize)
+                    .Take(pageSize),
+            };
+
+            return View(orderListViewModel);
+        }
+        public IActionResult ViewCust(int pageSize = 100, int pageNum = 1)
+        {
+
+            var custListViewModel = new CustListViewModel()
+            {
+                PaginationInfo = new PaginationInfo
+                {
+                    CurrentPage = pageNum,
+                    ItemsPerPage = pageSize,
+                    TotalItems = _repo.Customers.Count()
+                },
+                SelectedPageSize = pageSize,
+                customers = _repo.Customers
+                    .OrderBy(x => x.LastName)
+                    .Skip((pageNum - 1) * pageSize)
+                    .Take(pageSize),
+            };
+
+            return View(custListViewModel);
+
         }
     }
 }

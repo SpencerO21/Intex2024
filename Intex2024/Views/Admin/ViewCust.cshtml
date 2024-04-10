@@ -1,0 +1,30 @@
+﻿@{
+}
+@model Intex2024.Models.ViewModels.CustListViewModel
+
+<h1>Customers</h1>
+
+
+<div class="card m-1 p-1">
+    <div class="row">
+        <div class="col">
+            <h6><strong>Customer Name</strong></h6>
+        </div>
+        <div class="col">
+            <p><strong>Country of Residence</strong></p>
+        </div>
+        <div class="col">
+            <p><strong>Age</strong></p>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>
+
+
+<!-- ... rest of your product listing ... -->
+@foreach (Customer c in Model.customers)
+{
+    <partial name="AdminCardCust" model="c"></partial>
+}
+<div page-model="@Model.PaginationInfo" page-action="ViewCust" page-classes-enabled="true" page-class="btn"
+     page-class-normal="btn-outline-dark" page-class-selected="btn-primary" class="btn-group pull-right m-1"></div>

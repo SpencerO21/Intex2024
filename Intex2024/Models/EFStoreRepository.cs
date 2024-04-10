@@ -11,6 +11,7 @@ public class EFStoreRepository : IStoreRepository
 
     public IQueryable<Product> Products => _context.Products;
 
+
     public void UpdateProduct(Product product)
     {
         _context.Products.Update(product);
@@ -33,4 +34,8 @@ public class EFStoreRepository : IStoreRepository
         _context.Add(product);
         _context.SaveChanges();
     }
+
+    public IQueryable<Transaction> Transactions => _context.Transactions;
+    public IQueryable<Customer> Customers => _context.Customers;
+
 }
