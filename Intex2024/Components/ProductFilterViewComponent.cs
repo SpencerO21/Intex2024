@@ -14,11 +14,20 @@ public class ProductFilterViewComponent : ViewComponent
     
     public IViewComponentResult Invoke()
     {
-        var productTypes = _repo.Products
-            .Select(x => x.Category1)
-            .Distinct()
-            .OrderBy(x => x);
         
-        return View(productTypes);
+
+        var categories = _repo.Products
+            .ToList() // This executes the query and brings the results into memory
+            .SelectMany(x => new[] { x.Category1, x.Category2, x.Category3 })
+            .Distinct()
+            .Where(cat => !string.IsNullOrEmpty(cat))
+            .OrderBy(x => x)
+            .ToList()
+            .AsQueryable(); // Convert the List<string?> to IQueryable<string?>
+
+        return View(categories);
     }
+
+
+
 }

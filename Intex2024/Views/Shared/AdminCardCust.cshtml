@@ -1,0 +1,19 @@
+﻿@model Customer
+
+<div class="card m-1 p-1">
+    <div class="row">
+        <div class="col">
+            <h6>@Model.LastName, @Model.FirstName</h6>
+        </div>
+        <div class="col">
+            <p>@Model.CountryOfResidence</p>
+        </div>
+        <div class="col">
+            <p>@Model.Age</p>
+        </div>
+        <div class="col">
+            <button class="btn btn-primary">Edit</button>
+            <button class="btn btn-danger">Delete</button>
+        </div>
+    </div>
+</div>
