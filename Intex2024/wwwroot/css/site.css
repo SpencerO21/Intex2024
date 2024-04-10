@@ -26,3 +26,8 @@ body {
   object-fit: cover; /* This will cover the area without distorting the aspect ratio but might crop the image */
   max-height: 10rem;
 }
+
+.image {
+    max-width: 600px;
+    max-height: 400px;
+}
