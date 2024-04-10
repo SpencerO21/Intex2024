@@ -13,13 +13,24 @@ public class EFStoreRepository : IStoreRepository
 
     public void UpdateProduct(Product product)
     {
-        _context.Update(product);
+        _context.Products.Update(product);
         _context.SaveChanges();
+    }
+
+    public Product GetProductById(short id)
+    {
+        return _context.Products.Single(x => x.ProductId == id);
     }
 
     public void RemoveProduct(Product product)
     {
         _context.Remove(product);
+        _context.SaveChanges();
+    }
+
+    public void AddProduct(Product product)
+    {
+        _context.Add(product);
         _context.SaveChanges();
     }
 }
