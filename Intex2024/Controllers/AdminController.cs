@@ -33,5 +33,26 @@ namespace Intex2024.Controllers
 
             return View(productsListViewModel);
         }
+
+        public IActionResult ViewOrders(int pageSize = 25, int pageNum = 1)
+        {
+
+            var orderListViewModel = new OrderListViewModel()
+            {
+                PaginationInfo = new PaginationInfo
+                {
+                    CurrentPage = pageNum,
+                    ItemsPerPage = pageSize,
+                    TotalItems = _repo.Transactions.Count()
+                },
+                SelectedPageSize = pageSize,
+                Transactions = _repo.Transactions
+                    //.OrderBy(x => x.Date)
+                    .Skip((pageNum - 1) * pageSize)
+                    .Take(pageSize),
+            };
+
+            return View(orderListViewModel);
+        }
     }
 }

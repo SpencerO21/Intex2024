@@ -10,4 +10,5 @@ public class EFStoreRepository : IStoreRepository
     }
 
     public IQueryable<Product> Products => _context.Products;
+    public IQueryable<Transaction> Transactions => _context.Transactions;
 }

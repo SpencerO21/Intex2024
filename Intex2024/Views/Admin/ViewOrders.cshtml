@@ -8,13 +8,13 @@
 <div class="card m-1 p-1">
     <div class="row">
         <div class="col">
-            <h6><strong>Title</strong></h6>
+            <h6><strong>Order Number</strong></h6>
         </div>
         <div class="col">
-            <p><strong>Price</strong></p>
+            <p><strong>Total Amount</strong></p>
         </div>
         <div class="col">
-            <p><strong>Category</strong></p>
+            <p><strong>Fraud Detected</strong></p>
         </div>
         <div class="col"></div>
     </div>
@@ -24,7 +24,7 @@
 <!-- ... rest of your product listing ... -->
 @foreach (Product p in Model.products)
 {
-    <partial name="AdminCard" model="p"></partial>
+    <partial name="AdminCardOrders" model="p"></partial>
 }
 <div page-model="@Model.PaginationInfo" page-action="Index" page-classes-enabled="true" page-class="btn"
      page-class-normal="btn-outline-dark" page-class-selected="btn-primary" class="btn-group pull-right m-1"></div>

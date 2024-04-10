@@ -9,8 +9,6 @@
             <p>$@Model.Price</p>
         </div>
         <div class="col">
-@*             <p>@Model.Category1 - @Model.Category2 - @Model.Category3</p>
-            <p>if</p> *@
             @if (!string.IsNullOrEmpty(Model.Category2) && !string.IsNullOrEmpty(Model.Category3))
             {
                 <p>@Model.Category1 - @Model.Category2 - @Model.Category3</p>
