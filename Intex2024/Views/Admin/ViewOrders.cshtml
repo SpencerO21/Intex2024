@@ -22,7 +22,10 @@
         <div class="col"></div>
     </div>
 </div>
-
+<form method="get" action="@Url.Action("ViewOrders", "Admin")">
+    <vc:fraud-filter></vc:fraud-filter>
+    <button type="submit" class="btn btn-primary">Apply Filters</button>
+</form>
 
 <!-- ... rest of your product listing ... -->
 @foreach (Transaction t in Model.transactions)

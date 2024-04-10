@@ -4,11 +4,11 @@
 @{
 }
 
-@model IQueryable<string>
+@model IQueryable<bool>
 
     <div>
         <a class="btn btn-outline-secondary" asp-controller="Admin" asp-action="ViewOrders" asp-route-fraud="">Normal</a>
-    @foreach(string fraud in Model ?? Enumerable.Empty<string>())
+    @foreach(bool fraud in Model ?? Enumerable.Empty<bool>())
     {
         <a class="btn btn-outline-secondary" asp-controller="Admin" asp-action="ViewOrders" asp-route-fraud="@fraud" asp-route-pageNum="1">@fraud</a>
     }

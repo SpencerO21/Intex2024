@@ -36,21 +36,27 @@ namespace Intex2024.Controllers
 
         public IActionResult ViewOrders(bool? fraud, int pageSize = 200, int pageNum = 1)
         {
+            var query = _repo.Transactions.AsQueryable();
+            query = query.Where(x => x.Fraud == fraud);
+            ViewBag.IsFraud = fraud;
 
+            var transactions = query.Where(x => x.Fraud == fraud)
+                .OrderByDescending(x => x.Date)
+                .Skip((pageNum - 1) * pageSize)
+                .Take(pageSize);
+
+            var totalItems = query.Count();
             var orderListViewModel = new OrderListViewModel()
             {
                 PaginationInfo = new PaginationInfo
                 {
                     CurrentPage = pageNum,
                     ItemsPerPage = pageSize,
-                    TotalItems = _repo.Transactions.Count()
+                    TotalItems = totalItems
                 },
                 SelectedPageSize = pageSize,
-                transactions = _repo.Transactions
-                    .Where(x => x.Fraud == fraud)
-                    .OrderByDescending(x => x.Date)
-                    .Skip((pageNum - 1) * pageSize)
-                    .Take(pageSize),
+                transactions = transactions
+                    
             };
 
             return View(orderListViewModel);
