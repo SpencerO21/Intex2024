@@ -286,11 +286,11 @@ public class HomeController : Controller
         
         if (ViewBag.Prediction == 0)
         {
-            return View("PurchaseConfirmation");
+            // return View("PurchaseConfirmation");
         }
         else
         {
-            return View("Purchase Review");
+            // return View("Purchase Review");
         }
     }
 }
