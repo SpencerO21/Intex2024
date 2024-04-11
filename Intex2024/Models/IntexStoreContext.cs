@@ -15,6 +15,8 @@ public partial class IntexStoreContext : DbContext
     {
     }
 
+    public virtual DbSet<Cart> Carts { get; set; }
+
     public virtual DbSet<Customer> Customers { get; set; }
 
     public virtual DbSet<LineItem> LineItems { get; set; }
@@ -29,6 +31,18 @@ public partial class IntexStoreContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Cart>(entity =>
+        {
+            entity.HasKey(e => e.CartId).HasName("PK__Cart__2EFCCEDF1A6D6DB3");
+
+            entity.ToTable("Cart");
+
+            entity.Property(e => e.CartId)
+                .ValueGeneratedNever()
+                .HasColumnName("cart_ID");
+            entity.Property(e => e.Total).HasColumnName("total");
+        });
+
         modelBuilder.Entity<Customer>(entity =>
         {
             entity.Property(e => e.CustomerId)
@@ -36,6 +50,7 @@ public partial class IntexStoreContext : DbContext
                 .HasColumnName("customer_ID");
             entity.Property(e => e.Age).HasColumnName("age");
             entity.Property(e => e.BirthDate).HasColumnName("birth_date");
+            entity.Property(e => e.CartId).HasColumnName("cart_ID");
             entity.Property(e => e.CountryOfResidence)
                 .HasMaxLength(50)
                 .HasColumnName("country_of_residence");
@@ -51,12 +66,17 @@ public partial class IntexStoreContext : DbContext
             entity.Property(e => e.RelatedItem1).HasColumnName("related_item1");
             entity.Property(e => e.RelatedItem2).HasColumnName("related_item2");
             entity.Property(e => e.RelatedItem3).HasColumnName("related_item3");
+            entity.Property(e => e.UserId)
+                .HasMaxLength(255)
+                .IsUnicode(false)
+                .HasColumnName("user_ID");
         });
 
         modelBuilder.Entity<LineItem>(entity =>
         {
             entity.HasNoKey();
 
+            entity.Property(e => e.CartId).HasColumnName("cart_ID");
             entity.Property(e => e.ProductId).HasColumnName("product_ID");
             entity.Property(e => e.Qty).HasColumnName("qty");
             entity.Property(e => e.Rating).HasColumnName("rating");

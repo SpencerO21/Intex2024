@@ -24,4 +24,8 @@ public partial class Customer
     public int RelatedItem2 { get; set; }
 
     public int RelatedItem3 { get; set; }
+
+    public string? UserId { get; set; }
+
+    public int? CartId { get; set; }
 }
