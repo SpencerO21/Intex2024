@@ -3,13 +3,43 @@
 }
 @model Intex2024.Models.ViewModels.ProductListViewModel
 
+<style>
+
+    .no-padding-margin .hero-section {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
+</style>
+
+<div class="hero-section" style="background: linear-gradient(90deg, rgba(51, 152, 255, 1) 0%, rgba(0, 120, 255, 1) 50%, rgba(0, 56, 168, 1) 100%); color: white; text-align: center; position: relative; height: 100vh;">
+    <div class="hero-content" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+        <h1 style="font-size: 4rem; margin-bottom: 0.5em;">Aurora's Brick Kingdom</h1>
+        <p style="font-size: 1.5rem; margin-bottom: 1em; color: white;">Create Masterpieces, Brick by Brick.</p>
+        <button id="shopNowButton" class="btn btn-lg" style="font-size: 1rem; padding: 0.75em 1.5em; text-transform: uppercase; background-color: #FDB813; border-color: #FDB813;">Shop Now</button>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var shopNowButton = document.getElementById('shopNowButton');
+        var navbarHeight = 200; // Adjust if your navbar height is different
+        shopNowButton.addEventListener('click', function () {
+            window.scrollTo({
+                top: window.innerHeight,
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
+
 
 <h1>Recommended for you</h1><br />
 <div class="text-center">
     <div class="row">
         <div class="col-md-4 d-flex justify-content-center align-items-center">
             <a href="#" style="color: #444; text-decoration: none;">
-            <div class="card" style="width: 25rem;">
+                <div class="card" style="width: 25rem; height: 25rem;">
                 <img src="https://www.lego.com/cdn/cs/set/assets/blt136fb371e68cccbd/60253.jpg?format=webply&fit=bounds&quality=75&width=800&height=800&dpr=1" class="card-img-top" alt="...">
                     <div class="card-body bg-light">
                     <h5 class="card-title">Card title</h5>
@@ -21,7 +51,7 @@
 
         <div class="col-md-4 d-flex justify-content-center align-items-center">
             <a href="#" style="color: #444; text-decoration: none;">
-            <div class="card" style="width: 25rem;">
+                <div class="card" style="width: 25rem; height: 25rem;">
                     <img src="https://images.brickset.com/sets/large/71017-7.jpg?201611220640" class="card-img-top" alt="...">
                     <div class="card-body bg-light">
                     <h5 class="card-title">Card title</h5>
@@ -33,7 +63,7 @@
 
         <div class="col-md-4 d-flex justify-content-center align-items-center">
             <a href="#" style="color: #444; text-decoration: none;">
-                <div class="card" style="width: 25rem;">
+                <div class="card" style="width: 25rem; height: 25rem;">
                     <img src="https://www.lego.com/cdn/cs/set/assets/blt46a07a9b068b46c2/40174.jpg?format=webply&fit=bounds&quality=75&width=800&height=800&dpr=1" class="card-img-top" alt="...">
                     <div class="card-body bg-light">
                         <h5 class="card-title">Card title</h5>
@@ -123,9 +153,24 @@
                 <partial name="ProductCard" model="p"></partial>
             }
 
-            <div page-model="@Model.PaginationInfo" page-action="Index" page-classes-enabled="true" page-class="btn" 
+            <style>
+                .btn-group .btn {
+                    margin-right: 20px;
+                    margin-left: 20px;
+                    margin-bottom: 25px;
+                    margin-top: 20px;
+                }
+            </style>
+
+            <div page-model="@Model.PaginationInfo" page-action="Index" page-classes-enabled="true" page-class="btn"
+                 page-class-normal="btn-outline-dark" page-class-selected="btn-primary" page-url-cat="@Model.currentCat"
+                 class="btn-group pull-right m-1"></div>
+
+
+
+            @* <div page-model="@Model.PaginationInfo" page-action="Index" page-classes-enabled="true" page-class="btn" 
                  page-class-normal="btn-outline-dark" page-class-selected="btn-primary" page-url-cat="@Model.currentCat" class="btn-group pull-right m-1"></div>
-        </div>
+        *@ </div>
     </div>
 </div>
 

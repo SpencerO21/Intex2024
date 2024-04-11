@@ -151,7 +151,18 @@ footer {
     }
 }
 
+.card:hover
+{
+    background-color: darkgray
+}
 
 .card-body {
     color: #444;
 }
+
+
+
+
+
+
+
