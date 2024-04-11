@@ -36,6 +36,17 @@ public class EFStoreRepository : IStoreRepository
     }
 
     public IQueryable<Transaction> Transactions => _context.Transactions;
+
+    public void UpdateOrder(Transaction order)
+    {
+        _context.Transactions.Update(order);
+        _context.SaveChanges();
+    }
+
+    public Transaction GetTransactionById(int id)
+    {
+        return _context.Transactions.Single(x => x.TransactionId == id);
+    }
     public IQueryable<Customer> Customers => _context.Customers;
 
 }

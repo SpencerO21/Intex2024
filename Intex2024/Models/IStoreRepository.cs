@@ -12,6 +12,8 @@ public interface IStoreRepository
 
 
     public IQueryable<Transaction> Transactions { get; }
+    public void UpdateOrder(Transaction order);
+    public Transaction GetTransactionById(int id);
     public IQueryable<Customer> Customers { get; }
 
 }

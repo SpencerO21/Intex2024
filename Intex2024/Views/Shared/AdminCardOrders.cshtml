@@ -23,7 +23,7 @@
 
         </div>
         <div class="col">
-            <button class="btn btn-primary">Edit</button>
+            <a class="btn btn-primary" asp-controller="Admin" asp-action="EditOrder" asp-route-id="@Model.TransactionId">Edit</a>
             <button class="btn btn-danger">Delete</button>
         </div>
     </div>

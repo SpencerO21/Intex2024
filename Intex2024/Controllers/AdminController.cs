@@ -106,7 +106,13 @@ namespace Intex2024.Controllers
 
             return View(orderListViewModel);
         }
-        
+        [HttpGet]
+        public IActionResult EditOrder(int id)
+        {
+            var recordToEdit = _repo.GetTransactionById(id);
+            return View(recordToEdit);
+        }
+
         public IActionResult ViewCust(int pageSize = 100, int pageNum = 1)
         {
 
