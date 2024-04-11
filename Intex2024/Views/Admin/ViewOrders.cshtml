@@ -2,6 +2,11 @@
 }
 @model Intex2024.Models.ViewModels.OrderListViewModel
 
+
+<div class="container">
+
+<h1>Orders</h1>
+
 <div class="row">
     <div class="col-md-9">
         <h1>Orders</h1>
@@ -10,7 +15,6 @@
         <h4><strong><a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="AdminPortal">Back</a></strong></h4>
     </div>
 </div>
-
 
 
 
@@ -38,3 +42,5 @@
 }
 <div page-model="@Model.PaginationInfo" page-action="ViewOrders" page-classes-enabled="true" page-class="btn"
      page-class-normal="btn-outline-dark" page-class-selected="btn-primary" class="btn-group pull-right m-1"></div>
+
+</div>
