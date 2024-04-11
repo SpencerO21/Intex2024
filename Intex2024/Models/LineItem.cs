@@ -12,4 +12,6 @@ public partial class LineItem
     public int Qty { get; set; }
 
     public int? Rating { get; set; }
+
+    public int? CartId { get; set; }
 }
