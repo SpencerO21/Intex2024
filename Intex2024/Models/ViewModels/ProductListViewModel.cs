@@ -10,4 +10,8 @@ public class ProductListViewModel
     
     public string? currentCat { get; set; }
     public string? currentColor { get; set; }
+    public Product Product1 { get; set; }
+    public Product Product2 { get; set; }
+    public Product Product3 { get; set; }
+    public Customer Customer {  get; set; }
 }
