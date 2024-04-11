@@ -75,7 +75,7 @@ public class HomeController : Controller
     }
 
 
-
+    [HttpGet]
     public ActionResult ProductDetails(int id)
     {
         var product = _repo.Products.FirstOrDefault(x => x.ProductId == id);
@@ -83,8 +83,24 @@ public class HomeController : Controller
         {
             return NotFound();
         }
+        var relatedProduct1 = _repo.Products.FirstOrDefault(x => x.ProductId == product.RelatedItem1);
+        var relatedProduct2 = _repo.Products.FirstOrDefault(x => x.ProductId == product.RelatedItem2);
+        var relatedProduct3 = _repo.Products.FirstOrDefault(x => x.ProductId == product.RelatedItem3);
 
-        return View(product);
+        // Initialize ProductDetailsViewModel (Should contain a Product Object as well as
+        // Product objects for the related items.)
+
+        // Instead of passing the product, pass the viewmodel
+
+        var viewModel = new ProductDetailsViewModel
+        {
+            Product = product,
+            RelatedProduct1 = relatedProduct1,
+            RelatedProduct2 = relatedProduct2,
+            RelatedProduct3 = relatedProduct3,
+            LineItem = new LineItem()
+        };
+        return View(viewModel);
     }
 
 
@@ -104,6 +120,25 @@ public class HomeController : Controller
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 
+    [HttpPost]
+    public IActionResult AddItemCart(short productId, Customer cust, LineItem line)
+    {
+        var item = line;
+        item.CartId = cust.CartId;
+        item.ProductId = productId;
+        var product = _repo.Products.FirstOrDefault(x => x.ProductId == productId); 
+
+        item.TransactionId = 1;
+        _repo.AddItem(item);
+
+        return RedirectToAction("ViewCart");
+    }
+
+    [HttpPost]
+    public IActionResult RemoveItemCart()
+    {
+
+    }
 
     // public IActionResult Predict(int customer_ID, int amount, string day_of_week, string entry_mode,
     //     string type_of_transaction, string country_of_transaction, string shipping_address, string bank,

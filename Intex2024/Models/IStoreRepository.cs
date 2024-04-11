@@ -7,6 +7,7 @@ public interface IStoreRepository
     public void UpdateProduct(Product product);
     public void RemoveProduct(Product product);
     public void AddProduct(Product product);
+    public void AddItem(LineItem lineItem);
 
     public Product GetProductById(short id);
 
