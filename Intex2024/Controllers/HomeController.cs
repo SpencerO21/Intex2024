@@ -9,7 +9,9 @@ using Microsoft.ML.OnnxRuntime.Tensors;
 using Elfie.Serialization;
 using System.Drawing.Printing;
 using System.Drawing;
+using Intex2024.Data;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Intex2024.Controllers;
 
@@ -19,16 +21,21 @@ public class HomeController : Controller
     private IStoreRepository _repo;
     private readonly InferenceSession _session;
     private readonly IntexStoreContext _context;
-    private readonly UserManager<IdentityUser> _userManager;
+    private readonly UserManager<ApplicationUser> _userManager;
+    private readonly ApplicationDbContext _dbcontext;
 
 
-    public HomeController(IntexStoreContext context, ILogger<HomeController> logger, IStoreRepository temp, UserManager<IdentityUser> userManager)
+    public HomeController(IntexStoreContext context, 
+        ILogger<HomeController> logger, 
+        IStoreRepository temp, 
+        UserManager<ApplicationUser> userManager,
+        ApplicationDbContext applicationDbContext)
     {
         _context = context;
         _logger = logger;
         _repo = temp;
         _userManager = userManager;
-
+        _dbcontext = applicationDbContext;
         try
         {
             _session = new InferenceSession("C: /Users/eliasbaker/Source/Repos/Intex2024/Intex2024/fraudModel.onnx");
@@ -137,16 +144,17 @@ public class HomeController : Controller
     [HttpPost]
     public async Task<IActionResult> UserInfo(Customer cust)
     {
-        var user = await _userManager.GetUserAsync(User);
-        
-        string userId = "";
-        if (user != null)
+        if (User.Identity.IsAuthenticated)
         {
-            userId = user.Id;
+            var currentuser = await _userManager.FindByNameAsync(User.Identity.Name);
+            var userrole = _dbcontext.ApplicationUserRoles.Include(c=>c.User).Include(c=>c.Role).Where(c=>c.UserId == currentuser.Id).FirstOrDefault();  
+            var user = userrole.User;  
+            var role = userrole.Role;
+            cust.UserId = currentuser.Id;
         }
+        
         if (ModelState.IsValid)
         {
-            cust.UserId = userId;
             _repo.AddCustomer(cust);
             return RedirectToAction("Index");
         }
