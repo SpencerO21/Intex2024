@@ -4,17 +4,62 @@
 @{
 }
 
-<div>
-    <div>
-        <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="ViewProducts">Products</a>
-    </div>
-    <div>
-        <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="ViewOrders">View All Orders</a>
-    </div>
-    <div>
-        <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="ViewFraudOrders">View Fraudulent Orders</a>
-    </div>
-    <div>
-        <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="ViewCust">Users</a>
+<div class="text-center">
+    <div class="row">
+        <div class="col-md-3 d-flex justify-content-center align-items-center">
+            <div class="col-md-4 d-flex justify-content-center align-items-center">
+                <a href="@Url.Action("ViewProducts", "Admin")" style="color: #444; text-decoration: none;">
+                    <div class="card" style="width: 15rem;">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREK4NgXoEadNwzvnI3JGfTvPB5Z1i0ROqwbA&s" class="card-img-top" alt="...">
+                        <div class="card-body bg-light">
+                            <h5 class="card-title">View Products</h5>
+                            <p class="card-text">Access and manage product details, including names, descriptions, and prices.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+
+        <div class="col-md-3 d-flex justify-content-center align-items-center">
+            <div class="col-md-4 d-flex justify-content-center align-items-center">
+                <a href="@Url.Action("ViewOrders", "Admin")" style="color: #444; text-decoration: none;">
+                    <div class="card" style="width: 15rem;">
+                        <img src="data:image/png;base64,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" class="card-img-top" alt="...">
+                        <div class="card-body bg-light">
+                            <h5 class="card-title">View Orders</h5>
+                            <p class="card-text">Monitor and manage all customer orders, including order date and order total.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-3 d-flex justify-content-center align-items-center">
+            <div class="col-md-4 d-flex justify-content-center align-items-center">
+                <a href="@Url.Action("ViewFraudOrders", "Admin")" style="color: #444; text-decoration: none;">
+                    <div class="card" style="width: 15rem;">
+                        <img src="data:image/png;base64,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" class="card-img-top" alt="...">
+                        <div class="card-body bg-light">
+                            <h5 class="card-title">View Fraudulent Orders</h5>
+                            <p class="card-text">Identify and address potentially fraudulent orders to ensure transaction security.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-3 d-flex justify-content-center align-items-center">
+            <div class="col-md-4 d-flex justify-content-center align-items-center">
+                <a href="@Url.Action("ViewCust", "Admin")" style="color: #444; text-decoration: none;">
+                    <div class="card" style="width: 15rem;">
+                        <img src="data:image/png;base64,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" class="card-img-top" alt="...">
+                        <div class="card-body bg-light">
+                            <h5 class="card-title">View Users</h5>
+                            <p class="card-text">View and update user profiles, contact information, and their user status.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
     </div>
 </div>
