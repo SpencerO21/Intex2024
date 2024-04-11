@@ -2,7 +2,16 @@
 }
 @model Intex2024.Models.ViewModels.OrderListViewModel
 
-<h1>Orders</h1>
+<div class="row">
+    <div class="col-md-9">
+        <h1>Orders</h1>
+    </div>
+    <div class="col-md-3" style="text-align: right;">
+        <h4><strong><a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="AdminPortal">Back</a></strong></h4>
+    </div>
+</div>
+
+
 
 
 <div class="card m-1 p-1">
@@ -19,8 +28,6 @@
         <div class="col">
             <p><strong>Fraud Detected</strong></p>
         </div>
-        <div class="col"></div>
-    </div>
 </div>
 
 
