@@ -8,8 +8,21 @@
         <img src="@Model.ImgLink" class="card-img-top w-25 equal-height" alt="...">
         <div class="col product-details">
                 <h3 style="color: #444;">@Model.Name</h3>
+            <div>
+                    @if (!string.IsNullOrEmpty(Model.Category2) && !string.IsNullOrEmpty(Model.Category3))
+                    {
+                        <h5 class="p" style="color: #444;">@Model.Category1 - @Model.Category2 - @Model.Category3</h5>
+                    }
+                    else if (!string.IsNullOrEmpty(Model.Category2))
+                    {
+                        <h5 class="p" style="color: #444;">@Model.Category1 - @Model.Category2</h5>
+                    }
+                    else
+                    {
+                        <h5 class="p" style="color: #444;">@Model.Category1</h5>
+                    }
+            </div>
             
-            <h5 class="p" style="color: #444;">@Model.Category1</h5>
                 <h3 class="price" style="color: #444;">$@Model.Price</h3>
             </div>
     </div>

@@ -28,8 +28,13 @@
                         </tr>
                     </thead>
 
+<<<<<<< HEAD
                     @* <tbody>
                         @foreach (var l in Model.Cart?.Lines ?? Enumerable.Empty<Cart.CartLine>())
+=======
+                    <tbody>
+                        @* @foreach (var l in Model.Cart?.Lines ?? Enumerable.Empty<Cart.CartLine>())
+>>>>>>> 2e24227772f5f7008d0b288a26ae3526ab962a38
                         {
                             <tr>
                                 <td class="text-center"><img src="@l.Product.ImgLink" class="img-thumbnail" alt="@l.Product.Name"></td>
@@ -38,8 +43,13 @@
                                 <td class="text-right">$@l.Product.Price</td>
                                 <td class="text-right">$@(l.Quantity * l.Product.Price)</td>
                             </tr>
+<<<<<<< HEAD
                         }
                     </tbody> *@
+=======
+                        } *@
+                    </tbody>
+>>>>>>> 2e24227772f5f7008d0b288a26ae3526ab962a38
 
                     <tfoot>
                         <tr>

@@ -155,5 +155,17 @@ namespace Intex2024.Controllers
         {
              return View();
         }
+
+        public IActionResult ViewOrderDetails(int id)
+        {
+            // Query for the product and each related item
+            var transaction = _repo.Transactions.FirstOrDefault(x => x.TransactionId == id);
+            if (transaction == null)
+            {
+                return NotFound();
+            }
+            return View(transaction);
+        }
+
     }
 }

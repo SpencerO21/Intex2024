@@ -3,6 +3,7 @@
 @{
 }
 
+<div class="container">
 <h2>Your Cart</h2>
 <table class="table table-bordered table-striped">
     <thead>
@@ -15,8 +16,13 @@
         </tr>
     </thead>
 
+<<<<<<< HEAD
    @*  <tbody>
         @foreach (var l in Model.Cart?.Lines ?? Enumerable.Empty<Cart.CartLine>())
+=======
+    <tbody>
+        @* @foreach (var l in Model.Cart?.Lines ?? Enumerable.Empty<Cart.CartLine>())
+>>>>>>> 2e24227772f5f7008d0b288a26ae3526ab962a38
         {
             <tr>
                 <td class="text-left"><img src="@l.Product.ImgLink" class="card-img-top w-25 equal-height" alt="..."></td>
@@ -25,8 +31,13 @@
                 <td class="text-right">@l.Product.Price</td>
                 <td class="text-right">@((l.Quantity * l.Product.Price).ToString("c"))</td>
             </tr>
+<<<<<<< HEAD
         }
     </tbody> *@
+=======
+        } *@
+    </tbody>
+>>>>>>> 2e24227772f5f7008d0b288a26ae3526ab962a38
 
     <tfoot>
         <tr>
@@ -39,4 +50,5 @@
 <div class="text-center">
     <a class="btn btn-secondary" href="@Model.ReturnUrl">Continue Shopping</a>
     <a class="btn btn-primary" href="/Checkout">Proceed to Checkout</a>
+</div>
 </div>
