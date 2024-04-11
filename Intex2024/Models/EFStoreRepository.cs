@@ -35,6 +35,12 @@ public class EFStoreRepository : IStoreRepository
         _context.SaveChanges();
     }
 
+    public void AddItem(LineItem lineItem)
+    {
+        _context.Add(lineItem);
+        _context.SaveChanges();
+    }
+
     public IQueryable<Transaction> Transactions => _context.Transactions;
     public IQueryable<Customer> Customers => _context.Customers;
 
