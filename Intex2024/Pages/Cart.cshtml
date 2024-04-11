@@ -17,7 +17,7 @@
     </thead>
 
     <tbody>
-        @foreach (var l in Model.Cart?.Lines ?? Enumerable.Empty<Cart.CartLine>())
+        @* @foreach (var l in Model.Cart?.Lines ?? Enumerable.Empty<Cart.CartLine>())
         {
             <tr>
                 <td class="text-left"><img src="@l.Product.ImgLink" class="card-img-top w-25 equal-height" alt="..."></td>
@@ -26,13 +26,13 @@
                 <td class="text-right">@l.Product.Price</td>
                 <td class="text-right">@((l.Quantity * l.Product.Price).ToString("c"))</td>
             </tr>
-        }
+        } *@
     </tbody>
 
     <tfoot>
         <tr>
             <td colspan="4" class="text-right">Total:</td>
-            <td class="text-right">@Model.Cart?.CalculateTotal().ToString("c")</td>
+            @* <td class="text-right">@Model.Cart?.CalculateTotal().ToString("c")</td> *@
         </tr>
     </tfoot>
 </table>

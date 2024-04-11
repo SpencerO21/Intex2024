@@ -33,7 +33,7 @@ namespace Intex2024.Pages
             if (prod != null)
             {
                 Cart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
-                Cart.AddItem(prod, 1);
+                //Cart.AddItem(prod, 1);
                 HttpContext.Session.SetJson("cart", Cart);
 
             }
