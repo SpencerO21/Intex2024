@@ -2,20 +2,14 @@
 }
 @model Intex2024.Models.ViewModels.OrderListViewModel
 
-
-<div class="container">
-
-<h1>Orders</h1>
-
 <div class="row">
     <div class="col-md-9">
-        <h1>Orders</h1>
+        <h1>Fraud Orders</h1>
     </div>
     <div class="col-md-3" style="text-align: right;">
         <h4><strong><a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="AdminPortal">Back</a></strong></h4>
     </div>
 </div>
-
 
 
 <div class="card m-1 p-1">
@@ -32,15 +26,14 @@
         <div class="col">
             <p><strong>Fraud Detected</strong></p>
         </div>
+    </div>
 </div>
 
 
 <!-- ... rest of your product listing ... -->
 @foreach (Transaction t in Model.transactions)
 {
-    <partial name="AdminCardOrders" model="t"></partial>
+    <partial name="AdminCardFraudOrders" model="t"></partial>
 }
-<div page-model="@Model.PaginationInfo" page-action="ViewOrders" page-classes-enabled="true" page-class="btn"
+<div page-model="@Model.PaginationInfo" page-action="ViewFraudOrders" page-classes-enabled="true" page-class="btn"
      page-class-normal="btn-outline-dark" page-class-selected="btn-primary" class="btn-group pull-right m-1"></div>
-
-</div>
