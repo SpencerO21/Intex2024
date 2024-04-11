@@ -43,5 +43,7 @@ public class EFStoreRepository : IStoreRepository
 
     public IQueryable<Transaction> Transactions => _context.Transactions;
     public IQueryable<Customer> Customers => _context.Customers;
+    public IQueryable<LineItem> LineItems => _context.LineItems;
+    public IQueryable<Cart> Carts => _context.Carts;
 
 }

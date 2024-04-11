@@ -1,6 +1,6 @@
 @{
 }
-
+@model Intex2024.Models.ViewModels.CartViewModel
 <h2>Your Cart</h2>
 <table class="table table-bordered table-striped">
     <thead>
@@ -14,7 +14,7 @@
     </thead>
 
     <tbody>
-    @foreach (var l in Model.Cart?.Lines ?? Enumerable.Empty<Cart.CartLine>())
+    @foreach (var l in Model.LineItems)
     {
         <tr>
             <td class="text-left"><img src="@l.Product.ImgLink" class="card-img-top w-25 equal-height" alt="..."></td>

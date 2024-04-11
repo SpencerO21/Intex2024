@@ -14,5 +14,7 @@ public interface IStoreRepository
 
     public IQueryable<Transaction> Transactions { get; }
     public IQueryable<Customer> Customers { get; }
+    public IQueryable<LineItem> LineItems { get; }
+    public IQueryable<Cart> Carts { get; }
 
 }

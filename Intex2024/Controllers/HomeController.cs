@@ -7,6 +7,7 @@ using Microsoft.ML;
 using Microsoft.ML.OnnxRuntime;
 using Microsoft.ML.OnnxRuntime.Tensors;
 using Elfie.Serialization;
+using Microsoft.AspNetCore.Localization;
 
 namespace Intex2024.Controllers;
 
@@ -98,7 +99,8 @@ public class HomeController : Controller
             RelatedProduct1 = relatedProduct1,
             RelatedProduct2 = relatedProduct2,
             RelatedProduct3 = relatedProduct3,
-            LineItem = new LineItem()
+            LineItem = new LineItem(),
+            Customer = _repo.Customers.FirstOrDefault(x => x.CustomerId == 1)
         };
         return View(viewModel);
     }
@@ -120,6 +122,19 @@ public class HomeController : Controller
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 
+    public IActionResult Cart(Customer cust)
+    {
+        
+        var cartViewModel = new CartViewModel()
+        {
+            LineItems = _repo.LineItems.Where(x => x.CartId == cust.CartId),
+            cust = cust,
+            cart = _repo.Carts.SingleOrDefault(x => x.CartId == cust.CartId)
+        };
+
+        return View(cartViewModel);
+    }
+
     [HttpPost]
     public IActionResult AddItemCart(short productId, Customer cust, LineItem line)
     {
@@ -131,14 +146,14 @@ public class HomeController : Controller
         item.TransactionId = 1;
         _repo.AddItem(item);
 
-        return RedirectToAction("ViewCart");
+        return RedirectToAction("Cart", cust);
     }
 
-    [HttpPost]
-    public IActionResult RemoveItemCart()
-    {
-
-    }
+    // [HttpPost]
+    // public IActionResult RemoveItemCart()
+    // {
+    //
+    // }
 
     // public IActionResult Predict(int customer_ID, int amount, string day_of_week, string entry_mode,
     //     string type_of_transaction, string country_of_transaction, string shipping_address, string bank,

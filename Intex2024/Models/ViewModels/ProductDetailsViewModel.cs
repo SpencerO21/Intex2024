@@ -7,5 +7,7 @@
         public Product RelatedProduct2 { get; set; }
         public Product RelatedProduct3 { get; set; }
         public LineItem LineItem {  get; set; }
+        
+        public Customer Customer { get; set; }
     }
 }
