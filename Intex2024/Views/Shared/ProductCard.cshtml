@@ -1,16 +1,19 @@
 @model Product
 
 
-<div class="card m-1 p-1">
+<div class="product-card m-1 p-1 bg-light">
+    <a href="@Url.Action("ProductDetails", "Home", new { id = Model.ProductId })" class="product-link" style="color: #444; text-decoration: none;">
+
     <div class="row">
         <img src="@Model.ImgLink" class="card-img-top w-25 equal-height" alt="...">
-        <div class="col">
-            <a href="@Url.Action("ProductDetails", "Home", new { id = Model.ProductId })" class="product-link">
-                <h3>@Model.Name</h3>
-            </a>
-            <h3>$@Model.Price</h3>
-        </div>
-
+        <div class="col product-details">
+                <h3 style="color: #444;">@Model.Name</h3>
+            
+            <h5 class="p" style="color: #444;">@Model.Category1</h5>
+                <h3 class="price" style="color: #444;">$@Model.Price</h3>
+            </div>
     </div>
+    </a>
 </div>
+
 
