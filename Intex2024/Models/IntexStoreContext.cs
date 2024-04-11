@@ -51,6 +51,10 @@ public partial class IntexStoreContext : DbContext
             entity.Property(e => e.RelatedItem1).HasColumnName("related_item1");
             entity.Property(e => e.RelatedItem2).HasColumnName("related_item2");
             entity.Property(e => e.RelatedItem3).HasColumnName("related_item3");
+            entity.Property(e => e.UserId)
+                .HasMaxLength(255)
+                .IsUnicode(false)
+                .HasColumnName("user_ID");
         });
 
         modelBuilder.Entity<LineItem>(entity =>
@@ -102,8 +106,9 @@ public partial class IntexStoreContext : DbContext
 
         modelBuilder.Entity<Transaction>(entity =>
         {
-            entity.HasNoKey();
-
+            entity.Property(e => e.TransactionId)
+                .ValueGeneratedNever()
+                .HasColumnName("transaction_ID");
             entity.Property(e => e.Amount).HasColumnName("amount");
             entity.Property(e => e.Bank)
                 .HasMaxLength(50)
@@ -124,7 +129,6 @@ public partial class IntexStoreContext : DbContext
                 .HasMaxLength(50)
                 .HasColumnName("shipping_address");
             entity.Property(e => e.Time).HasColumnName("time");
-            entity.Property(e => e.TransactionId).HasColumnName("transaction_ID");
             entity.Property(e => e.TypeOfCard)
                 .HasMaxLength(50)
                 .HasColumnName("type_of_card");

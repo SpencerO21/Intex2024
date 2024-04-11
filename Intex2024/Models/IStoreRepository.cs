@@ -8,6 +8,7 @@ public interface IStoreRepository
     public void RemoveProduct(Product product);
     public void AddProduct(Product product);
 
+    public void AddCustomer(Customer customer);
     public Product GetProductById(short id);
 
 
