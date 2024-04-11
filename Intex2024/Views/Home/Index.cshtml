@@ -10,12 +10,11 @@
     {
         <div class="row">
             <div class="col-md-4 d-flex justify-content-center align-items-center">
-                <a href="@Url.Action("ProductDetails", "Home", new { id = Model.Product1.ProductId })" " style="color: #444; text-decoration: none;">
+                <a href="@Url.Action("ProductDetails", "Home", new { id = Model.Product1.ProductId })" style="color: #444; text-decoration: none;">
                 <div class="card" style="width: 25rem;">
-                        <img src="@Model.Product1.ImgLink" class="img-fluid" alt="Product Image">
-                        <div class="card-body bg-light">
-                        <h5 class="card-title">Card title</h5>
-                            <p class="card-text">@Model.Product1.Name</p>
+                    <img src="@Model.Product1.ImgLink" class="img-fluid" alt="Product Image">
+                    <div class="card-body bg-light">
+                        <h5 class="card-title">@Model.Product1.Name</h5>
                     </div>
                 </div>
                 </a>
@@ -23,13 +22,13 @@
 
             <div class="col-md-4 d-flex justify-content-center align-items-center">
                 <a href="@Url.Action("ProductDetails", "Home", new { id = Model.Product2.ProductId })" style="color: #444; text-decoration: none;">
-                <div class="card" style="width: 25rem;">
-                        <img src="@Model.Product2.ImgLink" class="img-fluid" alt="Product Image">
-                        <div class="card-body bg-light">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">@Model.Product2.Name</p>
+                    <div class="card" style="width: 25rem;">
+                            <img src="@Model.Product2.ImgLink" class="img-fluid" alt="Product Image">
+                            <div class="card-body bg-light">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">@Model.Product2.Name</p>
+                        </div>
                     </div>
-                </div>
                 </a>
             </div>
 
