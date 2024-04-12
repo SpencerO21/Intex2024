@@ -12,8 +12,8 @@
             <p>@Model.Age</p>
         </div>
         <div class="col">
-            <button class="btn btn-primary">Edit</button>
-            <button class="btn btn-danger">Delete</button>
+            <a class="btn btn-primary" asp-controller="Admin" asp-action="EditCustomer" asp-route-id="@Model.CustomerId">Edit</a>
+            <a class="btn btn-danger">Delete</a>
         </div>
     </div>
 </div>

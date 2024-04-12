@@ -5,6 +5,7 @@ public interface IStoreRepository
     public IQueryable<Product> Products { get; }
     public void UpdateTransaction(Transaction transaction);
     public void UpdateProduct(Product product);
+    public void UpdateCustomer(Customer cust);
     public void RemoveProduct(Product product);
     public void AddProduct(Product product);
     public void AddItem(LineItem lineItem);
@@ -14,6 +15,7 @@ public interface IStoreRepository
     public void SaveChanges();
     public void AddCustomer(Customer customer);
     public Product GetProductById(short id);
+    public Customer GetCustomerById(short id);
 
     public void AddTransaction(Transaction transaction);
     public IQueryable<Transaction> Transactions { get; }
