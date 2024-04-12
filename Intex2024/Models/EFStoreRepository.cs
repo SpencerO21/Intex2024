@@ -14,9 +14,20 @@ public class EFStoreRepository : IStoreRepository
     public IQueryable<Product> Products => _context.Products;
 
 
+    public void UpdateTransaction(Transaction transaction)
+    {
+        _context.Transactions.Update(transaction);
+        _context.SaveChanges();
+    }
+
     public void UpdateProduct(Product product)
     {
         _context.Products.Update(product);
+        _context.SaveChanges();
+    }
+    public void UpdateCustomer(Customer cust)
+    {
+        _context.Customers.Update(cust);
         _context.SaveChanges();
     }
 
@@ -28,6 +39,10 @@ public class EFStoreRepository : IStoreRepository
     public Product GetProductById(short id)
     {
         return _context.Products.Single(x => x.ProductId == id);
+    }
+    public Customer GetCustomerById(short id)
+    {
+        return _context.Customers.Single(x => x.CustomerId == id);
     }
 
     public void RemoveProduct(Product product)
@@ -84,6 +99,12 @@ public class EFStoreRepository : IStoreRepository
     public void UpdateCart(Cart cart)
     {
         _context.Carts.Update(cart);
+        _context.SaveChanges();
+    }
+
+    public void AddCustomer(Customer customer)
+    {
+        _context.Add(customer);
         _context.SaveChanges();
     }
 
