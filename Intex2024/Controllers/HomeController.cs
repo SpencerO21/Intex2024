@@ -9,6 +9,9 @@ using Microsoft.ML.OnnxRuntime.Tensors;
 using Elfie.Serialization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
+using System.Drawing.Printing;
+using System.Drawing;
+using Microsoft.AspNetCore.Identity;
 
 namespace Intex2024.Controllers;
 
@@ -18,12 +21,14 @@ public class HomeController : Controller
     private IStoreRepository _repo;
     private readonly InferenceSession _session;
     private readonly IntexStoreContext _context;
+    private readonly UserManager<IdentityUser> _userManager;
 
-    public HomeController(IntexStoreContext context, ILogger<HomeController> logger, IStoreRepository temp)
+    public HomeController(IntexStoreContext context, ILogger<HomeController> logger, IStoreRepository temp, UserManager<IdentityUser> userManager)
     {
         _context = context;
         _logger = logger;
         _repo = temp;
+        _userManager = userManager;
         //try
         //{
         //    _session = new InferenceSession("C: /Users/eliasbaker/Source/Repos/Intex2024/Intex2024/fraudModel.onnx");
@@ -228,6 +233,34 @@ public class HomeController : Controller
         _repo.AddItem(item);
 
         return RedirectToAction("Cart", customer);
+    }
+
+    [HttpGet]
+    public IActionResult UserInfo()
+    {
+        return View(new Customer());
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> UserInfo(Customer cust)
+    {
+        var user = await _userManager.GetUserAsync(User);
+
+        string userId = "";
+        if (user != null)
+        {
+            userId = user.Id;
+        }
+        if (ModelState.IsValid)
+        {
+            cust.UserId = userId;
+            _repo.AddCustomer(cust);
+            return RedirectToAction("Index");
+        }
+        else
+        {
+            return View("UserInfo", cust);
+        }
     }
 
     // [HttpPost]
