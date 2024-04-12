@@ -7,25 +7,28 @@
     <div class="hero-content" style="position: absolute; top: 50% !important; left: 50% !important; transform: translate(-50%, -50%) !important;">
         <h1 style="font-size: 4rem; margin-bottom: 0.5em;">Aurora's Brick Kingdom</h1>
         <p style="font-size: 1.5rem; margin-bottom: 1em; color: white;">Create Masterpieces, Brick by Brick.</p>
-        <button id="shopNowButton" class="btn btn-lg" style="font-size: 1rem; padding: 0.75em 1.5em; text-transform: uppercase; background-color: #FDB813; border-color: #FDB813;">Shop Now</button>
+        <button class="btn btn-lg" style="font-size: 1rem; padding: 0.75em 1.5em; text-transform: uppercase; background-color: #FDB813; border-color: #FDB813;">Shop Now</button>
     </div>
 </div>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        var shopNowButton = document.getElementById('shopNowButton');
-        var navbarHeight = 50; // Adjust if your navbar height is different
-        shopNowButton.addEventListener('click', function () {
-            window.scrollTo({
-                top: window.innerHeight,
-                behavior: 'smooth'
-            });
-        });
-    });
+<<script>
+     document.addEventListener('DOMContentLoaded', function () {
+         // Check if there's a hash in the URL
+         var hash = window.location.hash;
+         if (hash) {
+             // Remove the '#' symbol from the hash
+             var sectionId = hash.substring(1);
+             // Scroll to the section if it exists
+             var scroll = document.getElementById(sectionId);
+             if (scroll) {
+                 scroll.scrollIntoView({ behavior: 'smooth' });
+             }
+         }
+     });
 </script>
 
 
-<div class="container">
+<div class="container" id="scroll">
     <br />
     <h1>Recommended for you</h1><br />
     <div class="text-center">
@@ -123,7 +126,7 @@
         <div class="row">
             <!-- Filters Form Column -->
             <div class="col-md-4">
-                <form method="get" action="@Url.Action("Index", "Home")">
+                <form method="get" action="@Url.Action("Index", "Home")#scroll">
                     <!-- Product Filter Scrollable Box -->
                     <div class="filter-box mb-3" style="max-height: 300px; overflow-y: auto;">
                         <vc:product-filter></vc:product-filter>

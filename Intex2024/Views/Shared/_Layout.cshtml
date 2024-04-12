@@ -23,7 +23,7 @@
                         margin-right: 10px; /* Add some space between logo and text */
                     }
                 </style>   
-                <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">
+                <a class="navbar-brand text-white" href="@Url.Action("Index", "Home")#scroll">
                     <img src="~/white.png" alt="Logo">
                     Aurora's Brick Kingdom</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -33,7 +33,7 @@
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-white" href="@Url.Action("Index", "Home")#scroll">Home</a>
                     </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
