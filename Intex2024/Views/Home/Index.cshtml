@@ -24,23 +24,6 @@
     });
 </script>
 
-
-<div class="container">
-    <br />
-    <h1>Recommended for you</h1><br />
-    <div class="text-center">
-        <div class="row">
-            <div class="col-md-4 d-flex justify-content-center align-items-center">
-                <a href="#" style="color: #444; text-decoration: none;">
-                    <div class="card" style="width: 25rem; height: 25rem;">
-                        <img src="https://www.lego.com/cdn/cs/set/assets/blt136fb371e68cccbd/60253.jpg?format=webply&fit=bounds&quality=75&width=800&height=800&dpr=1" class="card-img-top" alt="...">
-                        <div class="card-body bg-light">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
 <h1>Recommended for you</h1><br />
 <div class="text-center">
     @if (User.Identity.IsAuthenticated && User.IsInRole("User"))
@@ -121,7 +104,8 @@
                 </a>
             </div>
         </div>
-    </div>
+    }
+</div>
 
     <br />
     <div class="row">
