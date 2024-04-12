@@ -86,8 +86,11 @@ public partial class IntexStoreContext : DbContext
 
         modelBuilder.Entity<Product>(entity =>
         {
-            entity.HasNoKey();
+            entity.HasKey(e => e.ProductId).HasName("PK__Products__470175FD9F672819");
 
+            entity.Property(e => e.ProductId)
+                .ValueGeneratedNever()
+                .HasColumnName("product_ID");
             entity.Property(e => e.Category1)
                 .HasMaxLength(50)
                 .HasColumnName("category1");
@@ -111,7 +114,6 @@ public partial class IntexStoreContext : DbContext
             entity.Property(e => e.PrimaryColor)
                 .HasMaxLength(50)
                 .HasColumnName("primary_color");
-            entity.Property(e => e.ProductId).HasColumnName("product_ID");
             entity.Property(e => e.RelatedItem1).HasColumnName("related_item1");
             entity.Property(e => e.RelatedItem2).HasColumnName("related_item2");
             entity.Property(e => e.RelatedItem3).HasColumnName("related_item3");
