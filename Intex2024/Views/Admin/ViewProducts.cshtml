@@ -2,14 +2,21 @@
 }
 @model Intex2024.Models.ViewModels.ProductListViewModel
 
+
+<div class="container">
+    <br />
 <div class="row">
     <div class="col-md-9">
         <h1><strong>Products</strong></h1>
     </div>
     <div class="col-md-3" style="text-align: right;">
-        <h4><strong><a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="AdminPortal">Back</a></strong></h4>
+            <div class="btn btn-outline-info btn-xs">
+                <h6><strong><a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="AdminPortal">Back</a></strong></h6>
+            </div>
+
     </div>
 </div>
+
 <a class="btn btn-primary" asp-controller="Admin" asp-action="AddProduct">Add Product</a>
 
 <div class="card m-1 p-1">
@@ -36,3 +43,4 @@
 <div page-model="@Model.PaginationInfo" page-action="ViewProducts" page-classes-enabled="true" page-class="btn"
      page-class-normal="btn-outline-dark" page-class-selected="btn-primary" class="btn-group pull-right m-1"></div>
      
+</div>

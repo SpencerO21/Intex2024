@@ -1,0 +1,60 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model Customer
+
+<form method="post" action="/Home/UserInfo">
+    <div>
+        <label asp-for="FirstName"></label>
+        <input asp-for="FirstName" class="form-control" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName" class="form-control" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="BirthDate"></label>
+        <input asp-for="BirthDate" class="form-control" />
+        <span asp-validation-for="BirthDate" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="CountryOfResidence"></label>
+        <select asp-for="CountryOfResidence" class="form-control">
+            <option value="India">India</option>
+            <option value="China">China</option>
+            <option value="USA">USA</option>
+            <option value="United Kingdom">United Kingdom</option>
+            <option value="Russia">Russia</option>
+        </select>
+        <span asp-validation-for="CountryOfResidence" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="Gender"></label>
+        <select asp-for="Gender" class="form-control">
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+            <option value="N">Other</option>
+        </select>
+        <span asp-validation-for="Gender" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="Age"></label>
+        <input asp-for="Age" class="form-control" type="number" />
+        <span asp-validation-for="Age" class="text-danger"></span>
+    </div>
+    <div>
+        <input asp-for="RelatedItem1" type="hidden" value="1" />
+    </div>
+    <div>
+        <input asp-for="RelatedItem2" type="hidden" value="2" />
+    </div>
+    <div>
+        <input asp-for="RelatedItem3" type="hidden" value="3" />
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

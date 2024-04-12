@@ -7,6 +7,9 @@ using Microsoft.ML;
 using Microsoft.ML.OnnxRuntime;
 using Microsoft.ML.OnnxRuntime.Tensors;
 using Elfie.Serialization;
+using System.Drawing.Printing;
+using System.Drawing;
+using Microsoft.AspNetCore.Identity;
 
 namespace Intex2024.Controllers;
 
@@ -16,21 +19,25 @@ public class HomeController : Controller
     private IStoreRepository _repo;
     private readonly InferenceSession _session;
     private readonly IntexStoreContext _context;
+    private readonly UserManager<IdentityUser> _userManager;
 
-    public HomeController(IntexStoreContext context, ILogger<HomeController> logger, IStoreRepository temp)
+
+    public HomeController(IntexStoreContext context, ILogger<HomeController> logger, IStoreRepository temp, UserManager<IdentityUser> userManager)
     {
         _context = context;
         _logger = logger;
         _repo = temp;
-        //try
-        //{
-        //    _session = new InferenceSession("C: /Users/eliasbaker/Source/Repos/Intex2024/Intex2024/fraudModel.onnx");
-        //    _logger.LogInformation("ONNX model loaded successfully");
-        //}
-        //catch (Exception ex)
-        //{
-        //    _logger.LogError($"Error loading the ONNX model: {ex.Message}");
-        //}
+        _userManager = userManager;
+
+        try
+        {
+            _session = new InferenceSession("C: /Users/eliasbaker/Source/Repos/Intex2024/Intex2024/fraudModel.onnx");
+            _logger.LogInformation("ONNX model loaded successfully");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Error loading the ONNX model: {ex.Message}");
+        }
     }
 
 
@@ -86,13 +93,30 @@ public class HomeController : Controller
 
     public ActionResult ProductDetails(int id)
     {
+        // Query for the product and each related item
         var product = _repo.Products.FirstOrDefault(x => x.ProductId == id);
         if (product == null)
         {
             return NotFound();
         }
 
-        return View(product);
+        var relatedProduct1 = _repo.Products.FirstOrDefault(x => x.ProductId == product.RelatedItem1);
+        var relatedProduct2 = _repo.Products.FirstOrDefault(x => x.ProductId == product.RelatedItem2);
+        var relatedProduct3 = _repo.Products.FirstOrDefault(x => x.ProductId == product.RelatedItem3);
+
+        // Initialize ProductDetailsViewModel (Should contain a Product Object as well as
+        // Product objects for the related items.)
+
+        // Instead of passing the product, pass the viewmodel
+
+        var viewModel = new ProductDetailsViewModel
+        {
+            Product = product,
+            RelatedProduct1 = relatedProduct1,
+            RelatedProduct2 = relatedProduct2,
+            RelatedProduct3 = relatedProduct3
+        };
+        return View(viewModel);
     }
 
 
@@ -110,6 +134,34 @@ public class HomeController : Controller
     public IActionResult Error()
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    }
+
+    [HttpGet]
+    public IActionResult UserInfo()
+    {
+        return View(new Customer());
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> UserInfo(Customer cust)
+    {
+        var user = await _userManager.GetUserAsync(User);
+        
+        string userId = "";
+        if (user != null)
+        {
+            userId = user.Id;
+        }
+        if (ModelState.IsValid)
+        {
+            cust.UserId = userId;
+            _repo.AddCustomer(cust);
+            return RedirectToAction("Index");
+        }
+        else
+        {
+            return View("UserInfo", cust);
+        }
     }
 
 
