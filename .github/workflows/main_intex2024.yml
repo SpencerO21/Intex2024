@@ -26,7 +26,7 @@ jobs:
         run: dotnet build Intex2024.sln --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish src/Intex2024.csproj -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet publish Intex2024.sln -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
