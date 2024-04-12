@@ -27,15 +27,15 @@ public class HomeController : Controller
         _logger = logger;
         _repo = temp;
         _userManager = userManager;
-        //try
-        //{
-        //    _session = new InferenceSession("C: /Users/eliasbaker/Source/Repos/Intex2024/Intex2024/fraudModel.onnx");
-        //    _logger.LogInformation("ONNX model loaded successfully");
-        //}
-        //catch (Exception ex)
-        //{
-        //    _logger.LogError($"Error loading the ONNX model: {ex.Message}");
-        //}
+        try
+        {
+            _session = new InferenceSession("C: /Users/eliasbaker/Source/Repos/Intex2024/Intex2024/fraudModel.onnx");
+            _logger.LogInformation("ONNX model loaded successfully");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Error loading the ONNX model: {ex.Message}");
+        }
     }
 
 
@@ -437,15 +437,15 @@ public class HomeController : Controller
     
             var inputs = new List<NamedOnnxValue>
                 { NamedOnnxValue.CreateFromTensor("float_input", inputTensor) };
-    
+
+            string fraudIndicator;
             using (var results = _session.Run(inputs))
             {
                 var prediction = results.FirstOrDefault(item => item.Name == "output_label")?.AsTensor<long>()
                     .ToArray();
                 if (prediction != null && prediction.Length > 0)
                 {
-                    var fraudIndicator = fraud_dict.GetValueOrDefault((int)prediction[0], "Unknown");
-                    ViewBag.Prediction = fraudIndicator;
+                    fraudIndicator = fraud_dict.GetValueOrDefault((int)prediction[0], "Unknown");
                     transaction.Fraud = fraudIndicator == "1";
                     _repo.UpdateTransaction(transaction);
                 }
