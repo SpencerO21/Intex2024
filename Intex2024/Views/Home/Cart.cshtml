@@ -7,34 +7,39 @@
     <tr>
         <th>Product</th>
         <th>Product Name</th>
-        <th>Quantity</th>
         <th class="text-right">Amount</th>
-        <th class="text-right">Subtotal</th>
+        <th>Quantity</th>
     </tr>
     </thead>
 
     <tbody>
-    @foreach (var l in Model.LineItems)
-    {
         <tr>
-            <td class="text-left"><img src="@l.Product.ImgLink" class="card-img-top w-25 equal-height" alt="..."></td>
-            <td class="text-left">@l.Product.Name</td>
-            <td class="text-center">@l.Quantity</td>
-            <td class="text-right">@l.Product.Price</td>
-            <td class="text-right">@((l.Quantity * l.Product.Price).ToString("c"))</td>
-        </tr>
-    }
+            @foreach (var l in Model.Products)
+            {
+                <td class="text-left"><img src="@l.ImgLink" class="card-img-top w-25 equal-height" alt="..."></td>
+                <td class="text-left">@l.Name</td>
+                <td class="text-right">@l.Price</td>
+            }
+            @foreach (var l in Model.LineItems)
+            {
+                <td class="text-left">@l.Qty</td>
+            }
+            
+        </tr >
     </tbody>
 
     <tfoot>
     <tr>
         <td colspan="4" class="text-right">Total:</td>
-        <td class="text-right">@Model.Cart?.CalculateTotal().ToString("c")</td>
+        <td class="text-right">@Model.cart.Total</td>
     </tr>
     </tfoot>
 </table>
 
 <div class="text-center">
-    <a class="btn btn-secondary" href="@Model.ReturnUrl">Continue Shopping</a>
-    <a class="btn btn-primary" href="/Checkout">Proceed to Checkout</a>
+    <a class="btn btn-secondary" asp-controller="Home" asp-action="Index">Continue Shopping</a>
+    <form asp-controller="Home" asp-action="Checkout" method="get">
+        <input type="hidden" name="CustomerId" value="@Model.cust.CustomerId" />
+        <button type="submit" class="btn btn-primary">Proceed to Checkout</button>
+    </form>
 </div>

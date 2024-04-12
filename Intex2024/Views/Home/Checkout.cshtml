@@ -1,39 +1,96 @@
-@{
-}
-<h2>Your Cart</h2>
-<table class="table table-bordered table-striped">
-    <thead>
-    <tr>
-        <th>Product</th>
-        <th>Product Name</th>
-        <th>Quantity</th>
-        <th class="text-right">Amount</th>
-        <th class="text-right">Subtotal</th>
-    </tr>
-    </thead>
+@model Intex2024.Models.ViewModels.CheckoutViewModel
 
-    <tbody>
-    @foreach (var l in Model.Cart?.Lines ?? Enumerable.Empty<Cart.CartLine>())
-    {
-        <tr>
-            <td class="text-left"><img src="@l.Product.ImgLink" class="card-img-top w-25 equal-height" alt="..."></td>
-            <td class="text-left">@l.Product.Name</td>
-            <td class="text-center">@l.Quantity</td>
-            <td class="text-right">@l.Product.Price</td>
-            <td class="text-right">@((l.Quantity * l.Product.Price).ToString("c"))</td>
-        </tr>
-    }
-    </tbody>
+  <h1>Check out</h1>
+  <h6>Please enter your details, and we'll ship your goods right away!</h6>
+  <form asp-action="Checkout" method="post">
+    <div>
+      <input asp-for= "Transaction.TransactionId" type="hidden"/>
+      
+      <input asp-for="custID" type="hidden" />
 
-    <tfoot>
-    <tr>
-        <td colspan="4" class="text-right">Total:</td>
-        <td class="text-right">@Model.Cart?.CalculateTotal().ToString("c")</td>
-    </tr>
-    </tfoot>
-</table>
-
-<div class="text-center">
-    <a class="btn btn-secondary" href="/Cart">Go Back</a>
-    <a class="btn btn-primary" href="/Confirmation">Checkout</a>
-</div>
+      <input asp-for="Transaction.Fraud" type="hidden" />
+    </div>
+    <div>
+      <label asp-for="Transaction.Date">Date:</label>
+      <input asp-for="Transaction.Date" />
+    </div>
+    <div>
+      <label asp-for="Transaction.DayOfWeek">Day of Week:</label>
+      <select asp-for= "Transaction.DayOfWeek">
+        <option value = "Sunday" > Sunday </option>
+        <option value = "Monday" > Monday </option>
+        <option value = "Tuesdsay" > Tuesday </option>
+        <option value = "Wednesday" > Wednesday </option >
+        <option value="Thursday"> Thursday </option>
+        <option value="Friday"> Friday </option>
+        <option value="Saturday"> Saturday </option>
+      </select>
+    </div>
+    <div>
+      <label asp-for="Transaction.Time">Time:</label>
+      <input asp-for="Transaction.Time" />
+      
+    </div>
+    <div>
+      <label asp-for="Transaction.EntryMode">Entry Mode:</label>
+      <select asp-for="Transaction.EntryMode">
+        <option value="CVC"> CVC </option>
+        <option value="Tap"> Tap </option>
+        <option value="PIN"> PIN </option>
+      </select>
+    </div>
+    <div>
+      <label asp-for="Transaction.Amount" >Amount:</label>
+      <input asp-for="Transaction.Amount" type="number"/>
+    </div>
+    <div>
+      <label asp-for="Transaction.TypeOfTransaction">Type of Transaction:</label>
+      <select asp-for="Transaction.TypeOfTransaction">
+        <option value="POS"> POS </option>
+        <option value="ATM"> ATM </option>
+        <option value="Online"> Online </option>
+      </select>
+    </div>
+    <div>
+      <label asp-for="Transaction.CountryOfTransaction">Country:</label>
+      <select asp-for="Transaction.CountryOfTransaction">
+        <option value="India"> India </option>
+        <option value="Russia"> Russia </option>
+        <option value="United Kingdom"> United Kingdom </option>
+        <option value="USA"> USA </option>
+        <option value="China"> China </option>
+      </select>
+    </div>
+    <div>
+      <label asp-for="Transaction.ShippingAddress">Shipping Address:</label>
+      <select asp-for="Transaction.ShippingAddress">
+        <option value="India"> India </option>
+        <option value="Russia"> Russia </option>
+        <option value="United Kingdom"> United Kingdom </option>
+        <option value="USA"> USA </option>
+        <option value="China"> China </option>
+      </select>
+    </div>
+    <div>
+      <label asp-for="Transaction.Bank">Bank:</label>
+      <select asp-for="Transaction.Bank" >
+        <option value="HSBC"> HSBC </option>
+        <option value="Halifax"> Halifax </option>
+        <option value="Lloyds"> Lloyds </option>
+        <option value="Metro"> Metro </option>
+        <option value="Monzo"> Monzo </option>
+        <option value="RBS"> RBS </option>
+        <option value="Barclays"> Barclay </option>
+      </select>
+    </div>
+    <div>
+      <label asp-for="Transaction.TypeOfCard">Type of Card:</label>
+      <select asp-for="Transaction.TypeOfCard">
+        <option value="Visa"> Visa </option>
+        <option value="MasterCard"> MasterCard </option>
+      </select>
+    </div>
+    <div class="text-center">
+      <button class="btn btn-primary" type="submit"> Submit</button>
+    </div>
+  </form>
