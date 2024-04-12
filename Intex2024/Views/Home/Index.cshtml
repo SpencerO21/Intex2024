@@ -125,14 +125,20 @@
             <div class="col-md-4">
                 <form method="get" action="@Url.Action("Index", "Home")">
                     <!-- Product Filter Scrollable Box -->
-                    <div class="filter-box mb-3" style="max-height: 300px; overflow-y: auto;">
-                        <vc:product-filter></vc:product-filter>
+                    <div class="border">
+                        <div class="filter-box mb-3" style="max-height: 300px; overflow-y: auto;">
+                            <vc:product-filter></vc:product-filter>
+                        </div>
                     </div>
 
+                    <br>
                     <!-- Color Filter Scrollable Box -->
-                    <div class="filter-box mb-3" style="max-height: 300px; overflow-y: auto;">
-                        <vc:color-filter></vc:color-filter>
+                    <div class="border">
+                        <div class="filter-box mb-3" style="max-height: 300px; overflow-y: auto;">
+                            <vc:color-filter></vc:color-filter>
+                        </div>
                     </div>
+                    <br />
 
                     <input type="hidden" name="pageNum" value="@Model.PaginationInfo.CurrentPage" />
                     <button type="submit" class="btn btn-primary">Apply Filters</button>
