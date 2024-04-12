@@ -21,15 +21,16 @@ public class HomeController : Controller
     private readonly IntexStoreContext _context;
     private readonly UserManager<IdentityUser> _userManager;
 
-    public HomeController(IntexStoreContext context, ILogger<HomeController> logger, IStoreRepository temp, UserManager<IdentityUser> userManager)
+    public HomeController(IntexStoreContext context, ILogger<HomeController> logger, IStoreRepository temp, UserManager<IdentityUser> userManager, InferenceSession session)
     {
         _context = context;
         _logger = logger;
         _repo = temp;
         _userManager = userManager;
+        _session = session;
         try
         {
-            _session = new InferenceSession("C: /Users/eliasbaker/Source/Repos/Intex2024/Intex2024/fraudModel.onnx");
+            _session = new InferenceSession("/fraudModel.onnx");
             _logger.LogInformation("ONNX model loaded successfully");
         }
         catch (Exception ex)

@@ -3,7 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Intex2024.Data;
 
 using Microsoft.Extensions.DependencyInjection;
-
+using Microsoft.Extensions.Hosting;
+using Microsoft.ML.OnnxRuntime;
 using Intex2024.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,6 +19,12 @@ services.AddAuthentication().AddGoogle(googleOptions =>
     googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
 });
 // Add services to the container.
+builder.Services.AddSingleton<InferenceSession>(provider =>
+{
+    // Path to your ONNX model
+    string modelPath = "/fraudModel.onnx";
+    return new InferenceSession(modelPath);
+});
 var connectionString = builder.Configuration.GetConnectionString("IdentityConnection") ??
                        throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
