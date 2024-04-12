@@ -16,17 +16,31 @@
 
     <tbody>
 
-        @for (int i = 0; i < Model.LineItems.Count(); i++)
-        {
-            <tr>
-                <td class="text-left"><img src="@Model.Products.ToList()[i].ImgLink" class="card-img-top w-25 equal-height" alt="..."></td>
-                <td class="text-left">@Model.Products.ToList()[i].Name</td>
-                <td class="text-left">@Model.LineItems.ToList()[i].Qty</td>
-                <td class="text-right">@Model.Products.ToList()[i].Price.ToString("C")</td>
-                <td class="text-right">@((Model.LineItems.ToList()[i].Qty * Model.Products.ToList()[i].Price).ToString("c"))</td>
 
-            </tr>
+        @{
+            // Convert IQueryable to List once
+            var products = Model.Products.ToList();
+            var lineItems = Model.LineItems.ToList();
         }
+
+                @for (int i = 0; i < lineItems.Count; i++)
+                {
+                    var product = (i < products.Count) ? products[i] : null;
+                    var lineItem = lineItems[i];
+
+                    <tr>
+                        <td class="text-left">
+                            @if (product != null && !string.IsNullOrEmpty(product.ImgLink))
+                            {
+                                <img src="@product.ImgLink" class="card-img-top w-25 equal-height" alt="Product Image">
+                            }
+                        </td>
+                        <td class="text-left">@product?.Name</td>
+                        <td class="text-left">@lineItem?.Qty</td>
+                        <td class="text-right">@product?.Price.ToString("C")</td>
+                <td class="text-right">$@((lineItem?.Qty ?? 0) * (product?.Price ?? 0)).00</td>
+                    </tr>
+                }
 
         
     </tbody>
