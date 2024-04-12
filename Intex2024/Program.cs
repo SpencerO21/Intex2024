@@ -14,8 +14,8 @@ var configuration = builder.Configuration;
 
 services.AddAuthentication().AddGoogle(googleOptions =>
 {
-    googleOptions.ClientId = configuration["GOOGLE_CLIENT_ID"];
-    googleOptions.ClientSecret = configuration["GOOGLE_CLIENT_SECRET"];
+    googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
+    googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
 });
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("IdentityConnection") ??
