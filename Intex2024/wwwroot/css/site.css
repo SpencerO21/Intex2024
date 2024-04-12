@@ -159,6 +159,9 @@ footer {
 .card-body {
     color: #444;
 }
+.main-content {
+    margin-bottom: 80px; /* Adjust the value as needed */
+}
 
 
 
