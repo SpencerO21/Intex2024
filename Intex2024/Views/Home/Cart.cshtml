@@ -1,0 +1,45 @@
+@{
+}
+@model Intex2024.Models.ViewModels.CartViewModel
+<h2>Your Cart</h2>
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>Product</th>
+        <th>Product Name</th>
+        <th class="text-right">Amount</th>
+        <th>Quantity</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            @foreach (var l in Model.Products)
+            {
+                <td class="text-left"><img src="@l.ImgLink" class="card-img-top w-25 equal-height" alt="..."></td>
+                <td class="text-left">@l.Name</td>
+                <td class="text-right">@l.Price</td>
+            }
+            @foreach (var l in Model.LineItems)
+            {
+                <td class="text-left">@l.Qty</td>
+            }
+            
+        </tr >
+    </tbody>
+
+    <tfoot>
+    <tr>
+        <td colspan="4" class="text-right">Total:</td>
+        <td class="text-right">@Model.cart.Total</td>
+    </tr>
+    </tfoot>
+</table>
+
+<div class="text-center">
+    <a class="btn btn-secondary" asp-controller="Home" asp-action="Index">Continue Shopping</a>
+    <form asp-controller="Home" asp-action="Checkout" method="get">
+        <input type="hidden" name="CustomerId" value="@Model.cust.CustomerId" />
+        <button type="submit" class="btn btn-primary">Proceed to Checkout</button>
+    </form>
+</div>
