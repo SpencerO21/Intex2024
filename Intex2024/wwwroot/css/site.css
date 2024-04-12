@@ -152,9 +152,8 @@ footer {
     }
 }
 
-.card:hover
-{
-    background-color: darkgray
+.hovcard:hover {
+    background-color: #444;
 }
 
 .card-body {
