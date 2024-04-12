@@ -59,6 +59,13 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseSession();
 
+app.Use(async (ctx, next) =>
+{
+    ctx.Response.Headers.Add("Content-Security-Policy",
+        "img-src 'self' *;");
+    await next();
+});
+
 app.UseRouting();
 
 app.UseAuthentication();
