@@ -1,37 +1,40 @@
 @{
 }
 @model Intex2024.Models.ViewModels.CartViewModel
+
 <h2>Your Cart</h2>
 <table class="table table-bordered table-striped">
     <thead>
     <tr>
-        <th>Product</th>
-        <th>Product Name</th>
-        <th class="text-right">Amount</th>
-        <th>Quantity</th>
+            <th>Product</th>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th class="text-right">Amount</th>
+            <th class="text-right">Subtotal</th>
     </tr>
     </thead>
 
     <tbody>
-        <tr>
-            @foreach (var l in Model.Products)
-            {
-                <td class="text-left"><img src="@l.ImgLink" class="card-img-top w-25 equal-height" alt="..."></td>
-                <td class="text-left">@l.Name</td>
-                <td class="text-right">@l.Price</td>
-            }
-            @foreach (var l in Model.LineItems)
-            {
-                <td class="text-left">@l.Qty</td>
-            }
-            
-        </tr >
+
+        @for (int i = 0; i < Model.LineItems.Count(); i++)
+        {
+            <tr>
+                <td class="text-left"><img src="@Model.Products.ToList()[i].ImgLink" class="card-img-top w-25 equal-height" alt="..."></td>
+                <td class="text-left">@Model.Products.ToList()[i].Name</td>
+                <td class="text-left">@Model.LineItems.ToList()[i].Qty</td>
+                <td class="text-right">@Model.Products.ToList()[i].Price.ToString("C")</td>
+                <td class="text-right">@((Model.LineItems.ToList()[i].Qty * Model.Products.ToList()[i].Price).ToString("c"))</td>
+
+            </tr>
+        }
+
+        
     </tbody>
 
     <tfoot>
     <tr>
         <td colspan="4" class="text-right">Total:</td>
-        <td class="text-right">@Model.cart.Total</td>
+            <td class="text-right">$@Model.cart.Total.00</td>
     </tr>
     </tfoot>
 </table>
@@ -40,6 +43,6 @@
     <a class="btn btn-secondary" href="@Url.Action("Index", "Home")#scroll">Continue Shopping</a>
     <form asp-controller="Home" asp-action="Checkout" method="get">
         <input type="hidden" name="CustomerId" value="@Model.cust.CustomerId" />
-        <button type="submit" class="btn btn-primary">Proceed to Checkout</button>
+        <button type="submit" class="btn btn-primary">Checkout</button>
     </form>
 </div>
