@@ -3,7 +3,7 @@ namespace Intex2024.Models;
 public interface IStoreRepository
 {
     public IQueryable<Product> Products { get; }
-
+    public void UpdateTransaction(Transaction transaction);
     public void UpdateProduct(Product product);
     public void RemoveProduct(Product product);
     public void AddProduct(Product product);
