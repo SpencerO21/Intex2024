@@ -74,8 +74,9 @@ public partial class IntexStoreContext : DbContext
 
         modelBuilder.Entity<LineItem>(entity =>
         {
-            entity.HasNoKey();
+            entity.HasKey(e => e.LineitemId).HasName("PK__LineItem__7A47E83324F507F6");
 
+            entity.Property(e => e.LineitemId).HasColumnName("lineitem_ID");
             entity.Property(e => e.CartId).HasColumnName("cart_ID");
             entity.Property(e => e.ProductId).HasColumnName("product_ID");
             entity.Property(e => e.Qty).HasColumnName("qty");

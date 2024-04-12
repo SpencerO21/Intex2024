@@ -41,19 +41,33 @@
             <h2>@Model.Product.Category1</h2>
             <h3>$@Model.Product.Price</h3>
             <br />
-@*             <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
-                    Quantity: 1
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Quantity: 2</a>
-                    <a class="dropdown-item" href="#">Quantity: 3</a>
-                    <a class="dropdown-item" href="#">Quantity: 4</a>
-                </div>
+            @*             <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+            Quantity: 1
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">Quantity: 2</a>
+            <a class="dropdown-item" href="#">Quantity: 3</a>
+            <a class="dropdown-item" href="#">Quantity: 4</a>
+            </div>
             </div> *@
-            <form id=@Model.Product.ProductId method="post" asp-page="/Cart">
-                <input type="hidden" asp-for="Product.ProductId" />
-                <input type="hidden" name="returnUrll" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+            <form method="post" action="/Home/AddItemCart">
+                <!-- Hidden field to pass the ProductId -->
+                <input type="hidden" name="productId" value="@Model.Product.ProductId" />
+                
+                <!-- Assuming you need to pass customer and line item details -->
+                <!-- Hidden fields for Customer data -->
+                <input type="hidden" name="custId" value="@Model.Customer.CustomerId" />
+                <input type="hidden" name="cartId" value="@Model.Customer.CartId" />
+            
+                <!-- Hidden fields for LineItem data (adjust names and values based on actual requirements) -->
+                <input type="hidden" name="line.Quantity" value="1" />
+                <input type="hidden" name="line.Price" value="@Model.Product.Price" />
+            
+                <!-- If you have a returnUrl, correct the typo in the name attribute -->
+                <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+            
+                <!-- Submit Button -->
                 <button type="submit" class="btn btn-primary btn-sm">Add to Cart</button>
             </form>
             <br />
@@ -73,4 +87,3 @@
         </div>
     </div>
 </div>
-

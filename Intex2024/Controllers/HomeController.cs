@@ -10,6 +10,8 @@ using Elfie.Serialization;
 using System.Drawing.Printing;
 using System.Drawing;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.EntityFrameworkCore;
 
 namespace Intex2024.Controllers;
 
@@ -82,7 +84,7 @@ public class HomeController : Controller
     }
 
 
-
+    [HttpGet]
     public ActionResult ProductDetails(int id)
     {
         // Query for the product and each related item
@@ -91,7 +93,6 @@ public class HomeController : Controller
         {
             return NotFound();
         }
-
         var relatedProduct1 = _repo.Products.FirstOrDefault(x => x.ProductId == product.RelatedItem1);
         var relatedProduct2 = _repo.Products.FirstOrDefault(x => x.ProductId == product.RelatedItem2);
         var relatedProduct3 = _repo.Products.FirstOrDefault(x => x.ProductId == product.RelatedItem3);
@@ -106,7 +107,9 @@ public class HomeController : Controller
             Product = product,
             RelatedProduct1 = relatedProduct1,
             RelatedProduct2 = relatedProduct2,
-            RelatedProduct3 = relatedProduct3
+            RelatedProduct3 = relatedProduct3,
+            LineItem = new LineItem(),
+            Customer = _repo.Customers.FirstOrDefault(x => x.CustomerId == 1)
         };
         return View(viewModel);
     }
@@ -126,6 +129,37 @@ public class HomeController : Controller
     public IActionResult Error()
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    }
+
+    public IActionResult Cart(Customer cust)
+    {
+        // Materialize the lineItems query here to avoid multiple open DataReaders.
+        List<LineItem> lineItems = _repo.LineItems.Where(x => x.CartId == cust.CartId).ToList();
+        List<Product> products = new List<Product>();
+        Cart cart = _repo.Carts.SingleOrDefault(x => x.CartId == cust.CartId);
+        int total = 0;
+
+        foreach (LineItem lineItem in lineItems)
+        {
+            // Now that lineItems are fetched, there should be no open reader conflict.
+            Product product = _repo.Products.FirstOrDefault(x => x.ProductId == lineItem.ProductId);
+            products.Add(product);
+            if (product != null) {
+                total += (product.Price * lineItem.Qty);
+            }
+        }
+        cart.Total = total;
+        // Save changes to database
+        _repo.UpdateCart(cart);
+        var cartViewModel = new CartViewModel()
+        {
+            LineItems = lineItems.AsQueryable(),
+            cust = cust,
+            cart = cart,
+            Products = products.AsQueryable()
+        };
+
+        return View(cartViewModel);
     }
 
     [HttpGet]
@@ -156,6 +190,87 @@ public class HomeController : Controller
         }
     }
 
+
+    [HttpGet]
+    public IActionResult Checkout(int customerID)
+    {
+        var checkoutViewModel = new CheckoutViewModel()
+        {
+            custID = customerID,
+            Transaction = new Transaction()
+        };
+        return View("Checkout", checkoutViewModel);
+    }
+    
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Checkout(CheckoutViewModel model)
+    {
+        if (ModelState.IsValid)
+        {
+            Transaction transaction = model.Transaction;
+        
+            // Calculate the transaction ID asynchronously
+            var lastTransaction = await _repo.Transactions.OrderByDescending(t => t.TransactionId).FirstOrDefaultAsync();
+            transaction.TransactionId = lastTransaction != null ? lastTransaction.TransactionId + 1 : 1;
+        
+            // Asynchronously get the customer
+            Customer customer = await _repo.Customers.FirstOrDefaultAsync(x => x.CustomerId == model.custID);
+            if (customer == null)
+            {
+                return NotFound("Customer not found.");
+            }
+            transaction.CustomerId = customer.CustomerId;
+        
+            // Asynchronously get the line items
+            List<LineItem> lineItems = await _repo.GetLineItemsByCartIdAsync(customer.CartId ?? 1);
+            foreach (LineItem lineItem in lineItems)
+            {
+                lineItem.TransactionId = model.Transaction.TransactionId;
+                lineItem.CartId = null;
+            }
+        
+            // Assume UpdateItemNoSave marks the entities as modified in the context
+            await _repo.SaveChangesAsync();
+
+            // Asynchronously add the transaction
+            await _repo.AddTransactionAsync(transaction);
+
+            return RedirectToAction("Confirmation");
+        }
+        else
+        {
+            return View("Checkout", model);
+        }
+    }
+
+
+
+    public IActionResult Confirmation()
+    {
+        return View();
+    }
+    
+    
+    [HttpPost]
+    public IActionResult AddItemCart(short productId, int cartId, int custId, LineItem line)
+    {
+        var item = line;
+        item.CartId = cartId;
+        item.Qty += 1;
+        item.ProductId = productId;
+        Customer customer = _repo.Customers.FirstOrDefault(x => x.CustomerId == custId);
+        item.TransactionId = 1;
+        _repo.AddItem(item);
+
+        return RedirectToAction("Cart", customer);
+    }
+
+    // [HttpPost]
+    // public IActionResult RemoveItemCart()
+    // {
+    //
+    // }
 
     // public IActionResult Predict(int customer_ID, int amount, string day_of_week, string entry_mode,
     //     string type_of_transaction, string country_of_transaction, string shipping_address, string bank,
