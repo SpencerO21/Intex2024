@@ -39,7 +39,7 @@ public class HomeController : Controller
     }
 
 
-    public IActionResult Index(string? cat, string? color, int pageSize = 5, int pageNum = 1)
+    public IActionResult Index(string? cat, string? color, int pageSize = 5, int pageNum = 1, int custId = 1)
     {
         var query = _repo.Products.AsQueryable();
 
@@ -61,6 +61,10 @@ public class HomeController : Controller
             .OrderBy(x => x.Name)
             .Skip((pageNum - 1) * pageSize)
             .Take(pageSize);
+        var cust = _repo.Customers.FirstOrDefault(x => x.CustomerId == custId);
+        var relatedProduct1 = _repo.Products.FirstOrDefault(x => x.ProductId == cust.RelatedItem1);
+        var relatedProduct2 = _repo.Products.FirstOrDefault(x => x.ProductId == cust.RelatedItem2);
+        var relatedProduct3 = _repo.Products.FirstOrDefault(x => x.ProductId == cust.RelatedItem3);
 
         var viewModel = new ProductListViewModel
         {
@@ -73,7 +77,11 @@ public class HomeController : Controller
             currentCat = cat,
             currentColor = color,
             SelectedPageSize = pageSize,
-            products = products
+            products = products,
+            Customer = cust,
+            Product1 = relatedProduct1,
+            Product2 = relatedProduct2,
+            Product3 = relatedProduct3
         };
 
         return View(viewModel);
