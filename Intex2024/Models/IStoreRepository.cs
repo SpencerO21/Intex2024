@@ -12,7 +12,6 @@ public interface IStoreRepository
     public void UpdateCart(Cart cart);
     public void UpdateItemNoSave(LineItem lineItem);
     public void SaveChanges();
-    public void AddCustomer(Customer customer);
     public Product GetProductById(short id);
 
     public void AddTransaction(Transaction transaction);

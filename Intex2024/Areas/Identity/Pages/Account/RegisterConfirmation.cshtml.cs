@@ -73,8 +73,7 @@ namespace Intex2024.Areas.Identity.Pages.Account
                     protocol: Request.Scheme);
             }
 
-            return RedirectToAction("UserInfo", "Home");
-            ;
+            return Page();
         }
     }
 }
