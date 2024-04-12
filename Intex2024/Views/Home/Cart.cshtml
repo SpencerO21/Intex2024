@@ -37,7 +37,7 @@
 </table>
 
 <div class="text-center">
-    <a class="btn btn-secondary" asp-controller="Home" asp-action="Index">Continue Shopping</a>
+    <a class="btn btn-secondary" href="@Url.Action("Index", "Home")#scroll">Continue Shopping</a>
     <form asp-controller="Home" asp-action="Checkout" method="get">
         <input type="hidden" name="CustomerId" value="@Model.cust.CustomerId" />
         <button type="submit" class="btn btn-primary">Proceed to Checkout</button>
