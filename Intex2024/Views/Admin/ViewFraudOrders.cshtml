@@ -1,46 +1,45 @@
 ﻿@{
 }
-@model Intex2024.Models.ViewModels.ProductListViewModel
-
+@model Intex2024.Models.ViewModels.OrderListViewModel
 
 <div class="container">
     <br />
 <div class="row">
     <div class="col-md-9">
-        <h1><strong>Products</strong></h1>
+        <h1>Fraud Orders</h1>
     </div>
     <div class="col-md-3" style="text-align: right;">
             <div class="btn btn-outline-info btn-xs">
                 <h6><strong><a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="AdminPortal">Back</a></strong></h6>
             </div>
-
     </div>
 </div>
 
-<a class="btn btn-primary" asp-controller="Admin" asp-action="AddProduct">Add Product</a>
 
 <div class="card m-1 p-1">
     <div class="row">
         <div class="col">
-            <h6><strong>Title</strong></h6>
+            <h6><strong>Order Number</strong></h6>
         </div>
         <div class="col">
-            <p><strong>Price</strong></p>
+            <p><strong>Date Ordered</strong></p>
         </div>
         <div class="col">
-            <p><strong>Category</strong></p>
+            <p><strong>Total Amount</strong></p>
         </div>
-        <div class="col"></div>
+        <div class="col">
+            <p><strong>Fraud Detected</strong></p>
+        </div>
     </div>
 </div>
 
 
 <!-- ... rest of your product listing ... -->
-@foreach (Product p in Model.products)
+@foreach (Transaction t in Model.transactions)
 {
-    <partial name="AdminCard" model="p"></partial>
+    <partial name="AdminCardFraudOrders" model="t"></partial>
 }
-<div page-model="@Model.PaginationInfo" page-action="ViewProducts" page-classes-enabled="true" page-class="btn"
+<div page-model="@Model.PaginationInfo" page-action="ViewFraudOrders" page-classes-enabled="true" page-class="btn"
      page-class-normal="btn-outline-dark" page-class-selected="btn-primary" class="btn-group pull-right m-1"></div>
-     
+
 </div>

@@ -1,3 +1,4 @@
+
 html {
   font-size: 14px;
 }
@@ -32,14 +33,6 @@ body {
     height: auto; /* This maintains the aspect ratio */
 }
 
-.card {
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    background-color: #fff;
-}
-
 .row {
     display: flex; /* Use flexbox for horizontal layout */
 }
@@ -71,3 +64,106 @@ p {
     height: 200px; /* Adjust this value to set the desired height */
     object-fit: cover;
 }
+
+
+/* Wrapper for the entire products section */
+.products-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Individual product card styling */
+.product-card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    padding: 15px;
+    background-color: #fff;
+}
+
+    .product-card:hover {
+        background-color: #E8EAEA;
+    }
+
+    /* Product image styling */
+    .product-card img {
+        width: 100%;
+        display: block;
+    }
+
+/* Product details styling */
+.product-details {
+    padding: 10px;
+    text-align: left;
+}
+
+    .product-details h3 {
+        margin: 10px 0;
+        font-size: 1.4em;
+        color: #333;
+        font-weight: bold;
+    }
+
+    .product-details p {
+        font-size: 0.8em;
+    }
+
+.price {
+    font-weight: bold;
+    color: #000;
+    font-size: 1.2em;
+}
+
+/* Footer and privacy link styling */
+footer {
+    padding: 10px;
+    text-align: center;
+    border-top: 1px solid #ddd;
+    margin-top: 20px;
+}
+
+    footer a {
+        color: #0066cc;
+        text-decoration: none;
+    }
+
+/* Color selection */
+.color-selection {
+    margin: 20px 0;
+}
+
+    .color-selection label {
+        padding-right: 10px;
+        font-size: 0.9em;
+    }
+
+    .color-selection input[type="checkbox"] {
+        margin-right: 5px;
+    }
+
+/* Responsive design adjustments */
+@media (max-width: 600px) {
+    .products-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+.card:hover
+{
+    background-color: darkgray
+}
+
+.card-body {
+    color: #444;
+}
+
+
+
+
+
+
+

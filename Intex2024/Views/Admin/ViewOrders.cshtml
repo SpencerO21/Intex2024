@@ -2,7 +2,20 @@
 }
 @model Intex2024.Models.ViewModels.OrderListViewModel
 
-<h1>Orders</h1>
+
+<div class="container">
+    <br/>
+<div class="row">
+    <div class="col-md-9">
+        <h1>Orders</h1>
+    </div>
+    <div class="col-md-3" style="text-align: right;">
+            <div class="btn btn-outline-info btn-xs">
+                <h6><strong><a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="AdminPortal">Back</a></strong></h6>
+            </div>
+    </div>
+</div>
+
 
 
 <div class="card m-1 p-1">
@@ -19,8 +32,9 @@
         <div class="col">
             <p><strong>Fraud Detected</strong></p>
         </div>
-        <div class="col"></div>
-    </div>
+        <div class="col">
+            <p><strong>Details</strong></p>
+        </div>
 </div>
 
 
@@ -31,3 +45,6 @@
 }
 <div page-model="@Model.PaginationInfo" page-action="ViewOrders" page-classes-enabled="true" page-class="btn"
      page-class-normal="btn-outline-dark" page-class-selected="btn-primary" class="btn-group pull-right m-1"></div>
+
+</div>
+</div>

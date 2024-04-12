@@ -106,7 +106,29 @@ namespace Intex2024.Controllers
 
             return View(orderListViewModel);
         }
-        
+
+        public IActionResult ViewFraudOrders(int pageSize = 200, int pageNum = 1)
+        {
+            var orderListViewModel = new OrderListViewModel()
+            {
+                PaginationInfo = new PaginationInfo
+                {
+                    CurrentPage = pageNum,
+                    ItemsPerPage = pageSize,
+                    TotalItems = _repo.Transactions.Count(x => x.Fraud)
+                },
+                SelectedPageSize = pageSize,
+                transactions = _repo.Transactions
+                    .Where(x => x.Fraud)
+                    .OrderByDescending(x => x.Date)
+                    .Skip((pageNum - 1) * pageSize)
+                    .Take(pageSize),
+            };
+
+            return View(orderListViewModel);
+        }
+
+
         public IActionResult ViewCust(int pageSize = 100, int pageNum = 1)
         {
 
@@ -133,5 +155,17 @@ namespace Intex2024.Controllers
         {
              return View();
         }
+
+        public IActionResult ViewOrderDetails(int id)
+        {
+            // Query for the product and each related item
+            var transaction = _repo.Transactions.FirstOrDefault(x => x.TransactionId == id);
+            if (transaction == null)
+            {
+                return NotFound();
+            }
+            return View(transaction);
+        }
+
     }
 }
