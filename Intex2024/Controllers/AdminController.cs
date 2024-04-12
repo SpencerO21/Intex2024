@@ -89,7 +89,8 @@ namespace Intex2024.Controllers
         public IActionResult DeleteProduct(short id)
         {
             var recordToDelete = _repo.Products.Single(x => x.ProductId == id);
-            return View("DeleteConfirmation", recordToDelete);
+            _repo.RemoveProduct(recordToDelete);
+            return RedirectToAction("ViewProducts");
         }
 
         [HttpPost]
