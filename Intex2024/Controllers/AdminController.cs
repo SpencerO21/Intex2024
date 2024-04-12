@@ -35,6 +35,27 @@ namespace Intex2024.Controllers
             return View(productsListViewModel);
         }
 
+        //public IActionResult ViewCust(int pageSize = 10, int pageNum = 1)
+        //{
+
+        //    var custListViewModel = new CustListViewModel()
+        //    {
+        //        PaginationInfo = new PaginationInfo
+        //        {
+        //            CurrentPage = pageNum,
+        //            ItemsPerPage = pageSize,
+        //            TotalItems = _repo.Products.Count()
+        //        },
+        //        SelectedPageSize = pageSize,
+        //        customers = _repo.Customers
+        //            .OrderBy(x => x.LastName)
+        //            .Skip((pageNum - 1) * pageSize)
+        //            .Take(pageSize),
+        //    };
+
+        //    return View(custListViewModel);
+        //}
+
 
         [HttpGet]
         public IActionResult EditProduct(short id)
@@ -48,6 +69,20 @@ namespace Intex2024.Controllers
         {
             _repo.UpdateProduct(updatedProduct);
             return RedirectToAction("ViewProducts");
+        }
+
+        [HttpGet]
+        public IActionResult EditCustomer(short id)
+        {
+            var recordToEdit = _repo.GetCustomerById(id);
+            return View(recordToEdit);
+        }
+
+        [HttpPost]
+        public IActionResult EditCustomer(Customer updatedCust)
+        {
+            _repo.UpdateCustomer(updatedCust);
+            return RedirectToAction("ViewCust");
         }
 
         [HttpGet]

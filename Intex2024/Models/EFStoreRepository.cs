@@ -19,6 +19,11 @@ public class EFStoreRepository : IStoreRepository
         _context.Products.Update(product);
         _context.SaveChanges();
     }
+    public void UpdateCustomer(Customer cust)
+    {
+        _context.Customers.Update(cust);
+        _context.SaveChanges();
+    }
 
     public void UpdateItemNoSave(LineItem lineItem)
     {
@@ -28,6 +33,10 @@ public class EFStoreRepository : IStoreRepository
     public Product GetProductById(short id)
     {
         return _context.Products.Single(x => x.ProductId == id);
+    }
+    public Customer GetCustomerById(short id)
+    {
+        return _context.Customers.Single(x => x.CustomerId == id);
     }
 
     public void RemoveProduct(Product product)
