@@ -13,16 +13,16 @@ var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 var configuration = builder.Configuration;
 
-//services.AddAuthentication().AddGoogle(googleOptions =>
-//{
-//    googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
-//    googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
-//});
-// Add services to the container.
+services.AddAuthentication().AddGoogle(googleOptions =>
+{
+    googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
+    googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
+});
+ // Add services to the container.
 builder.Services.AddSingleton<InferenceSession>(provider =>
 {
     // Path to your ONNX model
-    string modelPath = "fraudModel.onnx";
+    string modelPath = "/Users/spencerolson/RiderProjects/Intex2024/Intex2024/fraudModel.onnx";
     return new InferenceSession(modelPath);
 });
 var connectionString = builder.Configuration.GetConnectionString("IdentityConnection") ??
