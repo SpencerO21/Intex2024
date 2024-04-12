@@ -22,7 +22,7 @@ var configuration = builder.Configuration;
 builder.Services.AddSingleton<InferenceSession>(provider =>
 {
     // Path to your ONNX model
-    string modelPath = "/fraudModel.onnx";
+    string modelPath = "fraudModel.onnx";
     return new InferenceSession(modelPath);
 });
 var connectionString = builder.Configuration.GetConnectionString("IdentityConnection") ??

@@ -30,7 +30,7 @@ public class HomeController : Controller
         _session = session;
         try
         {
-            _session = new InferenceSession("/fraudModel.onnx");
+            _session = new InferenceSession("fraudModel.onnx");
             _logger.LogInformation("ONNX model loaded successfully");
         }
         catch (Exception ex)
