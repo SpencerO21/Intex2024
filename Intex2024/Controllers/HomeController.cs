@@ -30,7 +30,7 @@ public class HomeController : Controller
         _session = session;
         try
         {
-            _session = new InferenceSession("/Users/spencerolson/RiderProjects/Intex2024/Intex2024/fraudModel.onnx");
+            _session = new InferenceSession("fraudModel.onnx");
             _logger.LogInformation("ONNX model loaded successfully");
         }
         catch (Exception ex)

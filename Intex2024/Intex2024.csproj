@@ -10,6 +10,8 @@
     <ItemGroup>
 
         <None Update="Identity.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+
+        <None Include="wwwroot\fraudModel.onnx" />
     </ItemGroup>
 
     <ItemGroup>

@@ -22,7 +22,7 @@ services.AddAuthentication().AddGoogle(googleOptions =>
 builder.Services.AddSingleton<InferenceSession>(provider =>
 {
     // Path to your ONNX model
-    string modelPath = "/Users/spencerolson/RiderProjects/Intex2024/Intex2024/fraudModel.onnx";
+    string modelPath = "fraudModel.onnx";
     return new InferenceSession(modelPath);
 });
 var connectionString = builder.Configuration.GetConnectionString("IdentityConnection") ??
